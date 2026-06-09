@@ -36,28 +36,28 @@ if ($search_id) {
 <?php include '../includes/header_student.php'; ?>
 
 <?php if ($search_error): ?>
-    <div style="color: var(--danger); text-align: center; margin-bottom: 1.5rem; background: #fef2f2; border: 1px solid #fee2e2; padding: 0.75rem; border-radius: var(--radius-md); font-weight: 500;">
+    <div class="search-error">
         <?= htmlspecialchars($search_error) ?>
     </div>
 <?php endif; ?>
 
 <!-- Personal Information Card -->
-<div class="student-profile-card" style="margin-bottom: 2rem;">
+<div class="student-profile-card">
     <div class="profile-banner-premium"></div>
-    <div class="student-profile-body" style="padding-bottom: 2rem;">
+    <div class="student-profile-body">
         <div class="student-avatar-container">
             <?php if (!empty($student['ProfilePicture'])): ?>
-                <img src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Profile" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                <img src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Profile" class="profile-avatar">
             <?php else: ?>
                 <svg width="50%" height="50%" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--primary);"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
             <?php endif; ?>
         </div>
         
-        <h2 class="student-profile-name" style="font-size: 1.6rem;"><?= htmlspecialchars($student['Name']) ?></h2>
+        <h2 class="student-profile-name"><?= htmlspecialchars($student['Name']) ?></h2>
         
         <!-- Personal Details Grid inside the Card -->
-        <div style="width: 100%; border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-top: 0.5rem;">
-            <h3 class="dashboard-section-title-premium" style="margin-bottom: 1.25rem;">
+        <div class="personal-info-header">
+            <h3 class="dashboard-section-title-premium">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 Personal Details
             </h3>
@@ -99,7 +99,7 @@ if ($search_id) {
                 </div>
                 
                 <!-- Address -->
-                <div class="info-tile-premium" style="grid-column: span 1; min-width: 100%;">
+                <div class="info-tile-premium">
                     <div class="info-tile-icon-box">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>

@@ -319,7 +319,6 @@ textarea.form-control {
 
 .flash-warning {
     background-color: var(--warning);
-    color: #fff;
 }
 
 .flash-error {
@@ -942,6 +941,16 @@ h3 {
    REDESIGNED STUDENT PORTAL DASHBOARD (PREMIUM STYLES)
    ========================================================================== */
 
+.search-error {
+    color: var(--danger); 
+    text-align: center; 
+    margin-bottom: 1.5rem; 
+    background: #fef2f2; 
+    border: 1px solid #fee2e2; 
+    padding: 0.75rem; 
+    border-radius: var(--radius-md); 
+    font-weight: 500;
+}
 .student-dashboard-grid {
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -965,11 +974,13 @@ h3 {
     box-shadow: 0 10px 25px -5px rgba(15, 39, 68, 0.05), 0 8px 16px -6px rgba(15, 39, 68, 0.03);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
 }
 
 .student-profile-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 20px 35px -10px rgba(15, 39, 68, 0.08), 0 10px 20px -8px rgba(15, 39, 68, 0.04);
+
 }
 
 .profile-banner-premium {
@@ -992,6 +1003,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     position: relative;
+    padding-bottom: 2rem;
 }
 
 .student-avatar-container {
@@ -1014,8 +1026,15 @@ h3 {
     transform: scale(1.03);
 }
 
+.profile-avatar{
+    width:100%; 
+    height:100%;
+    border-radius:50%; 
+    object-fit:cover;
+}
+
 .student-profile-name {
-    font-size: 1.35rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--primary);
     text-align: center;
@@ -1100,6 +1119,14 @@ h3 {
     margin-bottom: 1.5rem;
 }
 
+.personal-info-header {
+    width: 100%; 
+    border-top: 1px solid var(--border-color); 
+    padding-top: 1.5rem; 
+    margin-top: 0.5rem;
+}
+
+
 .dashboard-section-title-premium {
     font-size: 1.15rem;
     font-weight: 700;
@@ -1108,6 +1135,7 @@ h3 {
     align-items: center;
     gap: 0.5rem;
     font-family: var(--font-heading);
+    margin-bottom: 1.25rem;
 }
 
 /* Info Tiles Grid */
@@ -1126,6 +1154,8 @@ h3 {
     align-items: center;
     gap: 1rem;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    grid-column: span 1; 
+    min-width: 100%;
 }
 
 .info-tile-premium:hover {

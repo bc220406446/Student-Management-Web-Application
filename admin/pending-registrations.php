@@ -46,10 +46,8 @@ include '../includes/header_admin.php';
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Date of Birth</th>
                         <th>Class Applied</th>
-                        <th>Academic Year</th>
-                        <th>Date Registered</th>
+                        <th>Applied Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -65,9 +63,7 @@ include '../includes/header_admin.php';
                                 </div>
                             </td>
                             <td><?= htmlspecialchars($student['Email']) ?></td>
-                            <td><?= htmlspecialchars($student['DateOfBirth']) ?></td>
                             <td><?= htmlspecialchars($student['ClassGrade']) ?></td>
-                            <td><?= htmlspecialchars($student['AcademicYear']) ?></td>
                             <td class="text-muted"><?= date('M j, Y', strtotime($student['CreatedAt'])) ?></td>
                             <td>
                                 <div style="display:flex; gap:0.5rem;">

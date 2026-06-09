@@ -94,11 +94,8 @@ include '../includes/header_admin.php';
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Class</th>
-                    <th>Section</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -108,11 +105,8 @@ include '../includes/header_admin.php';
                     <?php foreach ($students as $index => $s): ?>
                         <tr>
                             <td class="text-muted"><?= $offset + $index + 1 ?></td>
-                            <td><?= $s['Status'] === 'Approved' ? '#STU-' . date('Y', strtotime($s['CreatedAt'])) . '-' . str_pad($s['StudentID'], 5, '0', STR_PAD_LEFT) : '-' ?></td>
                             <td style="font-weight:500;"><?= htmlspecialchars($s['Name']) ?></td>
                             <td><?= htmlspecialchars($s['Email']) ?></td>
-                            <td><?= htmlspecialchars($s['ClassGrade']) ?></td>
-                            <td><?= htmlspecialchars($s['Section'] ?? '-') ?></td>
                             <td>
                                 <?php
                                 $badge = $s['Status'] === 'Approved' ? 'badge-success' : ($s['Status'] === 'Pending' ? 'badge-warning' : 'badge-error');

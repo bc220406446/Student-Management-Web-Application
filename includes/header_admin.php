@@ -55,7 +55,6 @@ $pending_count = $pending_stmt->fetchColumn();
             <div class="topbar">
                 <h2 style="margin:0; font-family:var(--font-heading); font-size:1.25rem;"><?= isset($page_title) ? ucwords(strtolower(htmlspecialchars($page_title))) : 'Dashboard' ?></h2>
                 <div style="display:flex; align-items:center; gap:1rem;">
-                    <span class="text-muted text-sm"><?= date('l, F j, Y') ?></span>
                     <!-- Admin Icon Top Right -->
                     <div style="position:relative;">
                         <div class="avatar-chip" id="adminAvatar" style="cursor:pointer;" title="<?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>">
