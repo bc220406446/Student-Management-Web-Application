@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             flashBanner.style.animation = 'slideDown 0.3s ease-out reverse forwards';
             setTimeout(() => flashBanner.remove(), 300);
-        }, 5000);
+        }, 10000);
     }
 
     // Password show/hide toggle

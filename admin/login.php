@@ -36,24 +36,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Student Management System</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        /* Admin specific theme overrides */
-        .split-left { background-color: #1e3a5f; }
-        .tag-admin { background: #0f2744; color: white; border: 1px solid rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <?php display_flash_message(); ?>
     <div class="split-layout">
         <div class="split-left">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:2rem; font-family:var(--font-heading); font-size:1.5rem;">
+            <div class="portal-brand">
                 <span>Student Management System</span>
             </div>
-            <span class="tag tag-admin">Admin Portal</span>
+            <span class="tag">Admin Portal</span>
             <h1 class="mb-2">Secure admin access</h1>
-            <p style="color: rgba(255,255,255,0.8);" class="mb-3">Manage student registrations, academic records, and oversee the entire system.</p>
+            <p class="split-note mb-3">Manage student registrations, academic records, and oversee the entire system.</p>
             
-            <div style="margin-top: 2rem; display: flex; justify-content: center;">
+            <div class="split-hero-icon">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     <rect x="9" y="11" width="6" height="4" rx="1"></rect>
@@ -63,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="split-right">
-            <div class="auth-form-container card" style="border-top: 4px solid #1e3a5f;">
-                <div style="display:flex; justify-content:center; margin-bottom: 1rem;">
-                    <div class="badge" style="background: #e2e8f0; color: #334155;">Admin Access</div>
+            <div class="auth-form-container card admin-login-card">
+                <div class="badge-center">
+                    <div class="badge badge-neutral">Admin Access</div>
                 </div>
                 <h2 class="text-center mb-1">Sign in to admin panel</h2>
                 <p class="text-center text-muted mb-3">Enter your administrative credentials</p>
@@ -84,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-block mt-3" style="background-color: #1e3a5f;">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Sign In</button>
                     
-                    <div class="text-center text-muted mt-3" style="font-size: 0.75rem;">
+                    <div class="text-center text-muted mt-3 fine-print">
                         This portal is restricted to authorized personnel only.
                     </div>
                 </form>

@@ -34,12 +34,12 @@ include '../includes/header_admin.php';
 ?>
 
 <?php if (count($pending_students) > 0): ?>
-    <div style="background: var(--warning); color: white; padding: 1rem 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem; font-weight: 500; display: flex; align-items: center; gap: 0.75rem;">
+    <div class="review-banner">
         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
         <?= count($pending_students) ?> registration(s) are awaiting your review.
     </div>
     
-    <div class="card" style="padding: 0;">
+    <div class="admin-panel">
         <div class="table-wrapper">
             <table class="table">
                 <thead>
@@ -55,23 +55,20 @@ include '../includes/header_admin.php';
                     <?php foreach ($pending_students as $student): ?>
                         <tr>
                             <td>
-                                <div style="display:flex; align-items:center; gap:0.75rem;">
-                                    <div class="avatar-chip" style="width:32px; height:32px; font-size:0.875rem;">
-                                        <?= substr(htmlspecialchars($student['Name']), 0, 1) ?>
-                                    </div>
-                                    <span style="font-weight:500;"><?= htmlspecialchars($student['Name']) ?></span>
+                                <div class="inline-identity">
+                                    <span class="table-name"><?= htmlspecialchars($student['Name']) ?></span>
                                 </div>
                             </td>
                             <td><?= htmlspecialchars($student['Email']) ?></td>
                             <td><?= htmlspecialchars($student['ClassGrade']) ?></td>
                             <td class="text-muted"><?= date('M j, Y', strtotime($student['CreatedAt'])) ?></td>
                             <td>
-                                <div style="display:flex; gap:0.5rem;">
-                                    <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;" title="View Full Record" onclick="openViewModal(<?= htmlspecialchars(json_encode($student)) ?>)">
+                                <div class="action-group">
+                                    <button class="btn btn-outline btn-icon" title="View Full Record" onclick="openViewModal(<?= htmlspecialchars(json_encode($student)) ?>)">
                                         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
-                                    <button class="btn btn-success" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="openApproveModal(<?= $student['StudentID'] ?>, '<?= htmlspecialchars(addslashes($student['Name'])) ?>', '<?= htmlspecialchars(addslashes($student['ClassGrade'])) ?>', '<?= htmlspecialchars(addslashes($student['Section'] ?? '')) ?>', '<?= htmlspecialchars(addslashes($student['RollNumber'] ?? '')) ?>', '<?= htmlspecialchars(addslashes($student['AdmissionDate'] ?? '')) ?>')">Approve</button>
-                                    <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="openRejectModal(<?= $student['StudentID'] ?>, '<?= htmlspecialchars(addslashes($student['Name'])) ?>')">Reject</button>
+                                    <button class="btn btn-primary btn-sm" onclick="openApproveModal(<?= $student['StudentID'] ?>, '<?= htmlspecialchars(addslashes($student['Name'])) ?>', '<?= htmlspecialchars(addslashes($student['ClassGrade'])) ?>', '<?= htmlspecialchars(addslashes($student['Section'] ?? '')) ?>', '<?= htmlspecialchars(addslashes($student['RollNumber'] ?? '')) ?>', '<?= htmlspecialchars(addslashes($student['AdmissionDate'] ?? '')) ?>')">Approve</button>
+                                    <button class="btn btn-outline btn-sm" onclick="openRejectModal(<?= $student['StudentID'] ?>, '<?= htmlspecialchars(addslashes($student['Name'])) ?>')">Reject</button>
                                 </div>
                             </td>
                         </tr>
@@ -82,7 +79,7 @@ include '../includes/header_admin.php';
     </div>
 <?php else: ?>
     <div class="empty-state">
-        <div style="margin-bottom: 1.5rem; color: var(--success);">
+        <div class="empty-state-icon">
             <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <h3>All caught up.</h3>
@@ -90,74 +87,11 @@ include '../includes/header_admin.php';
     </div>
 <?php endif; ?>
 
-<!-- View Student Modal -->
-<div class="modal-overlay" id="viewStudentModal">
-    <div class="modal-card" style="max-width:600px; width:90%;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-            <h3 style="margin:0;" id="viewModalTitle">Student Record</h3>
-            <button class="btn btn-outline" style="padding:0.25rem 0.75rem;" data-modal-close>✕</button>
-        </div>
-        <div id="viewModalContent"></div>
-    </div>
-</div>
-
-<!-- Approve Modal -->
-<div class="modal-overlay" id="approveModal">
-    <div class="modal-card">
-        <h3 class="mb-3" id="approveModalTitle">Approve Registration</h3>
-        <p class="text-muted mb-3" id="approveModalSub">Student details...</p>
-        
-        <form method="POST" action="">
-            <input type="hidden" name="action" value="approve">
-            <input type="hidden" name="student_id" id="approveStudentId">
-            
-            <div class="row">
-                <div class="col-6 form-group">
-                    <label class="form-label">Assign Section</label>
-                    <select name="section" id="approveSection" class="form-control" required>
-                        <option value="">Select...</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                    </select>
-                </div>
-                <div class="col-6 form-group">
-                    <label class="form-label">Assign Roll Number</label>
-                    <input type="text" name="roll_number" id="approveRollNumber" class="form-control" required>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Admission Date</label>
-                <input type="date" name="admission_date" id="approveAdmissionDate" class="form-control" value="<?= date('Y-m-d') ?>" required>
-            </div>
-            
-            <div class="modal-actions">
-                <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
-                <button type="submit" class="btn btn-success">Confirm Approval</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Reject Modal -->
-<div class="modal-overlay" id="rejectModal">
-    <div class="modal-card">
-        <h3 class="mb-3">Reject Registration</h3>
-        <p class="mb-3" id="rejectModalMessage">Are you sure you want to reject this registration?</p>
-        
-        <form method="POST" action="">
-            <input type="hidden" name="action" value="reject">
-            <input type="hidden" name="student_id" id="rejectStudentId">
-            
-            <div class="modal-actions">
-                <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
-                <button type="submit" class="btn btn-danger">Confirm Reject</button>
-            </div>
-        </form>
-    </div>
-</div>
+<?php
+include '../includes/modals/admin-view-student.php';
+include '../includes/modals/admin-approve-registration.php';
+include '../includes/modals/admin-reject-registration.php';
+?>
 
 </div> <!-- Close content-area -->
 </div> <!-- Close dashboard-layout -->
@@ -192,17 +126,72 @@ function openRejectModal(id, name) {
     document.getElementById('rejectModal').style.display = 'flex';
 }
 
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    }[char]));
+}
+
+function displayValue(value, fallback = '-') {
+    return escapeHtml(value || fallback);
+}
+
+function academicValue(value) {
+    return displayValue(value, 'Not Assigned');
+}
+
+function hasRealProfileImage(s) {
+    const profilePicture = s.ProfilePicture || '';
+    return s.Status === 'Approved'
+        && profilePicture
+        && !profilePicture.toLowerCase().includes('no profile picture')
+        && !profilePicture.toLowerCase().includes('no-profile-picture');
+}
+
 function openViewModal(s) {
-    document.getElementById('viewModalTitle').textContent = s.Name;
+    const year = s.CreatedAt ? s.CreatedAt.substring(0, 4) : new Date().getFullYear();
+    const stuId = s.Status === 'Approved' ? `#STU-${year}-${String(s.StudentID).padStart(5,'0')}` : 'Pending Approval';
+    const statusBadge = {Approved:'badge-success',Pending:'badge-warning',Rejected:'badge-error'}[s.Status] || 'badge-warning';
+    const profileHtml = hasRealProfileImage(s)
+        ? `<img src="../${escapeHtml(s.ProfilePicture)}" alt="${escapeHtml(s.Name)} profile image" class="student-modal-avatar">`
+        : `<div class="student-modal-avatar-empty">No Profile Image</div>`;
+
     document.getElementById('viewModalContent').innerHTML = `
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">EMAIL</div><div>${s.Email}</div></div>
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">DATE OF BIRTH</div><div>${s.DateOfBirth || '-'}</div></div>
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">CONTACT NO</div><div>${s.ContactNo || '-'}</div></div>
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">CLASS / GRADE</div><div>${s.ClassGrade || '-'}</div></div>
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">ACADEMIC YEAR</div><div>${s.AcademicYear || '-'}</div></div>
-            <div><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">REGISTERED</div><div>${s.CreatedAt ? s.CreatedAt.substring(0,10) : '-'}</div></div>
-            <div style="grid-column:span 2;"><div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-bottom:0.25rem;">ADDRESS</div><div>${s.Address || '-'}</div></div>
+        <div class="student-modal-section">
+            <div class="student-modal-profile">
+                ${profileHtml}
+                <div>
+                    <h3 class="student-modal-profile-name">${escapeHtml(s.Name)}</h3>
+                    <span class="badge ${statusBadge}">${escapeHtml(s.Status)}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="student-modal-section">
+            <div class="student-modal-section-title">Personal Information</div>
+            <div class="detail-grid">
+                <div><div class="detail-label">EMAIL</div><div>${displayValue(s.Email)}</div></div>
+                <div><div class="detail-label">DATE OF BIRTH</div><div>${displayValue(s.DateOfBirth)}</div></div>
+                <div><div class="detail-label">CONTACT NO</div><div>${displayValue(s.ContactNo)}</div></div>
+                <div><div class="detail-label">APPLIED ON</div><div>${displayValue(s.CreatedAt ? s.CreatedAt.substring(0,10) : '')}</div></div>
+                <div class="detail-grid-full"><div class="detail-label">ADDRESS</div><div>${displayValue(s.Address)}</div></div>
+            </div>
+        </div>
+
+        <div class="student-modal-section">
+            <div class="student-modal-section-title">Academic Record</div>
+            <div class="detail-grid">
+                <div><div class="detail-label">STUDENT ID</div><div class="detail-value">${escapeHtml(stuId)}</div></div>
+                <div><div class="detail-label">CLASS / GRADE</div><div>${academicValue(s.ClassGrade)}</div></div>
+                <div><div class="detail-label">SECTION</div><div>${academicValue(s.Section)}</div></div>
+                <div><div class="detail-label">ROLL NUMBER</div><div>${academicValue(s.RollNumber)}</div></div>
+                <div><div class="detail-label">ADMISSION DATE</div><div>${academicValue(s.AdmissionDate)}</div></div>
+                <div><div class="detail-label">ACADEMIC YEAR</div><div>${academicValue(s.AcademicYear)}</div></div>
+            </div>
         </div>
     `;
     document.getElementById('viewStudentModal').style.display = 'flex';

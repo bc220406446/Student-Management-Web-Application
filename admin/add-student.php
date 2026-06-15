@@ -65,14 +65,14 @@ $page_title = "Add New Student";
 include '../includes/header_admin.php';
 ?>
 
-<div style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+<div class="breadcrumb">
     <a href="dashboard.php" class="text-muted">Dashboard</a> › <a href="all-students.php" class="text-muted">All Students</a> › Add Student
 </div>
 
-<div class="card" style="padding: 0;">
+<div class="admin-panel">
     <form method="POST" action="" enctype="multipart/form-data">
-        <div style="padding: 2rem;">
-            <h3 class="mb-3" style="color: var(--primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Section 1 — Personal Information</h3>
+        <div class="admin-panel-body">
+            <h3 class="mb-3 admin-section-title">Section 1 - Personal Information</h3>
             
             <div class="row">
                 <div class="col-6 form-group">
@@ -123,16 +123,16 @@ include '../includes/header_admin.php';
             </div>
             
             <div class="form-group">
-                <label class="form-label">Profile Picture (Optional)</label>
+                <label class="form-label">Profile Picture</label>
                 <input type="file" name="profile_picture" class="form-control" accept=".jpg,.jpeg,.png,.webp">
             </div>
             
-            <h3 class="mb-3 mt-2" style="color: var(--primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Section 2 — Academic Information</h3>
+            <h3 class="mb-3 mt-2 admin-section-title">Section 2 - Academic Information</h3>
             
             <div class="row">
                 <div class="col-6 form-group">
-                    <label class="form-label">Class/Grade</label>
-                    <select name="class_grade" class="form-control">
+                    <label class="form-label">Class/Grade *</label>
+                    <select name="class_grade" class="form-control" required>
                         <option value="">Select...</option>
                         <?php
                         $grades = ['Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
@@ -144,8 +144,8 @@ include '../includes/header_admin.php';
                     </select>
                 </div>
                 <div class="col-6 form-group">
-                    <label class="form-label">Academic Year</label>
-                    <select name="academic_year" class="form-control">
+                    <label class="form-label">Academic Year *</label>
+                    <select name="academic_year" class="form-control" required>
                         <option value="">Select...</option>
                         <?php
                         $years = ['2023-2024', '2024-2025', '2025-2026'];
@@ -160,9 +160,9 @@ include '../includes/header_admin.php';
             
             <div class="row">
                 <div class="col-6 form-group">
-                    <label class="form-label">Section</label>
-                    <select name="section" class="form-control">
-                        <option value="">Not Assigned</option>
+                    <label class="form-label">Section *</label>
+                    <select name="section" class="form-control" required>
+                        <option value="">Select...</option>
                         <option value="A" <?= (isset($section) && $section == 'A') ? 'selected' : '' ?>>A</option>
                         <option value="B" <?= (isset($section) && $section == 'B') ? 'selected' : '' ?>>B</option>
                         <option value="C" <?= (isset($section) && $section == 'C') ? 'selected' : '' ?>>C</option>
@@ -170,19 +170,19 @@ include '../includes/header_admin.php';
                     </select>
                 </div>
                 <div class="col-6 form-group">
-                    <label class="form-label">Roll Number</label>
-                    <input type="text" name="roll_number" class="form-control" value="<?= htmlspecialchars($roll_number ?? '') ?>">
+                    <label class="form-label">Roll Number *</label>
+                    <input type="text" name="roll_number" class="form-control" value="<?= htmlspecialchars($roll_number ?? '') ?>" required>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-6 form-group">
-                    <label class="form-label">Admission Date</label>
-                    <input type="date" name="admission_date" class="form-control" value="<?= htmlspecialchars($admission_date ?? '') ?>">
+                    <label class="form-label">Admission Date *</label>
+                    <input type="date" name="admission_date" class="form-control" value="<?= htmlspecialchars($admission_date ?? '') ?>" required>
                 </div>
                 <div class="col-6 form-group">
-                    <label class="form-label">Initial Status</label>
-                    <select name="status" class="form-control">
+                    <label class="form-label">Initial Status *</label>
+                    <select name="status" class="form-control" required>
                         <option value="Approved" <?= (isset($status) && $status == 'Approved') ? 'selected' : '' ?>>Approved</option>
                         <option value="Pending" <?= (isset($status) && $status == 'Pending') ? 'selected' : '' ?>>Pending</option>
                         <option value="Rejected" <?= (isset($status) && $status == 'Rejected') ? 'selected' : '' ?>>Rejected</option>
@@ -191,7 +191,7 @@ include '../includes/header_admin.php';
             </div>
         </div>
         
-        <div class="card-header" style="border-bottom: none; border-top: 1px solid var(--border-color); padding: 1.5rem 2rem; margin: 0; background: #fafafa; border-radius: 0 0 var(--radius-lg) var(--radius-lg); display: flex; justify-content: flex-end; gap: 1rem;">
+        <div class="admin-panel-footer">
             <a href="all-students.php" class="btn btn-outline">Cancel</a>
             <button type="submit" class="btn btn-primary">Save Student</button>
         </div>

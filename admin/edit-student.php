@@ -103,14 +103,14 @@ $admission_date = $_POST['admission_date'] ?? $student['AdmissionDate'];
 $status = $_POST['status'] ?? $student['Status'];
 ?>
 
-<div style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+<div class="breadcrumb">
     <a href="dashboard.php" class="text-muted">Dashboard</a> › <a href="all-students.php" class="text-muted">All Students</a> › Edit Student
 </div>
 
-<div class="card" style="padding: 0;">
+<div class="admin-panel">
     <form method="POST" action="" enctype="multipart/form-data">
-        <div style="padding: 2rem;">
-            <h3 class="mb-3" style="color: var(--primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Section 1 — Personal Information</h3>
+        <div class="admin-panel-body">
+            <h3 class="mb-3 admin-section-title">Section 1 - Personal Information</h3>
             
             <div class="row">
                 <div class="col-6 form-group">
@@ -125,10 +125,10 @@ $status = $_POST['status'] ?? $student['Status'];
                 </div>
             </div>
             
-            <div style="background: var(--bg-color); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <div class="soft-box">
                 <details>
-                    <summary style="font-weight: 500; cursor: pointer; color: var(--primary);">Reset Password (Optional)</summary>
-                    <div class="row" style="margin-top: 1rem;">
+                    <summary>Reset Password (Optional)</summary>
+                    <div class="row mt-2">
                         <div class="col-6 form-group">
                             <label class="form-label">New Password</label>
                             <div class="password-wrapper">
@@ -168,14 +168,14 @@ $status = $_POST['status'] ?? $student['Status'];
             <div class="form-group">
                 <label class="form-label">Profile Picture (Leave empty to keep current)</label>
                 <?php if ($student['ProfilePicture']): ?>
-                    <div style="margin-bottom: 0.5rem;">
-                        <img src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Current Profile" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-color);">
+                    <div class="profile-picture-wrap">
+                        <img src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Current Profile" class="current-profile-picture">
                     </div>
                 <?php endif; ?>
                 <input type="file" name="profile_picture" class="form-control" accept=".jpg,.jpeg,.png,.webp">
             </div>
             
-            <h3 class="mb-3 mt-2" style="color: var(--primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Section 2 — Academic Information</h3>
+            <h3 class="mb-3 mt-2 admin-section-title">Section 2 - Academic Information</h3>
             
             <div class="row">
                 <div class="col-6 form-group">
@@ -239,7 +239,7 @@ $status = $_POST['status'] ?? $student['Status'];
             </div>
         </div>
         
-        <div class="card-header" style="border-bottom: none; border-top: 1px solid var(--border-color); padding: 1.5rem 2rem; margin: 0; background: #fafafa; border-radius: 0 0 var(--radius-lg) var(--radius-lg); display: flex; justify-content: flex-end; gap: 1rem;">
+        <div class="admin-panel-footer">
             <a href="all-students.php" class="btn btn-outline">Cancel</a>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
