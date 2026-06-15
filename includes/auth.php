@@ -2,10 +2,11 @@
 session_start();
 
 // Flash message functions
-function set_flash_message($type, $message) {
+function set_flash_message($type, $message, $duration = 10000) {
     $_SESSION['flash'] = [
         'type' => $type, // 'success', 'warning', 'error'
-        'message' => $message
+        'message' => $message,
+        'duration' => (int) $duration
     ];
 }
 
@@ -13,14 +14,16 @@ function display_flash_message() {
     if (isset($_SESSION['flash'])) {
         $type = $_SESSION['flash']['type'];
         $message = $_SESSION['flash']['message'];
+        $duration = (int) ($_SESSION['flash']['duration'] ?? 10000);
         
         $css_class = '';
         if ($type === 'success') $css_class = 'flash-success';
         if ($type === 'warning') $css_class = 'flash-warning';
         if ($type === 'error') $css_class = 'flash-error';
         
-        echo "<div class='flash-banner $css_class' id='flashBanner'>
+        echo "<div class='flash-banner $css_class' id='flashBanner' data-duration='$duration'>
                 <div class='flash-content'>$message</div>
+                <button type='button' class='flash-close' id='flashClose' aria-label='Close message'>&times;</button>
               </div>";
         
         unset($_SESSION['flash']);
@@ -59,3 +62,4 @@ function redirect_if_admin_logged_in() {
     }
 }
 ?>
+

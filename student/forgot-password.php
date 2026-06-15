@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
         $_SESSION['reset_token'] = $token;
         $_SESSION['reset_student_id'] = $user['StudentID'];
         $_SESSION['reset_expires'] = $expires;
-        set_flash_message('success', 'A reset link has been generated. <a href="forgot-password.php?step=reset&token=' . $token . '" class="link-light">Click here to reset your password</a>');
+        set_flash_message('success', 'A reset link has been generated. <a href="forgot-password.php?step=reset&token=' . $token . '" class="link-light">Click here to reset your password</a>', 20000);
     } else {
         set_flash_message('error', 'No account found with that email address.');
     }
@@ -155,3 +155,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
 <script src="../assets/js/main.js"></script>
 </body>
 </html>
+

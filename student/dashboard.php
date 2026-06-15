@@ -43,7 +43,7 @@ if ($search_id) {
 
 <!-- Personal Information Card -->
 <div class="student-profile-card">
-    <div class="profile-banner-premium"></div>
+    <div class="student-profile-banner"></div>
     <div class="student-profile-body">
         <div class="student-avatar-container">
             <?php if (!empty($student['ProfilePicture'])): ?>
@@ -57,14 +57,14 @@ if ($search_id) {
         
         <!-- Personal Details Grid inside the Card -->
         <div class="personal-info-header">
-            <h3 class="dashboard-section-title-premium">
+            <h3 class="student-section-title">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 Personal Details
             </h3>
             
             <div class="info-tiles-grid">
                 <!-- Email -->
-                <div class="info-tile-premium">
+                <div class="info-tile">
                     <div class="info-tile-icon-box">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </div>
@@ -75,7 +75,7 @@ if ($search_id) {
                 </div>
                 
                 <!-- Contact No -->
-                <div class="info-tile-premium">
+                <div class="info-tile">
                     <div class="info-tile-icon-box">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     </div>
@@ -86,7 +86,7 @@ if ($search_id) {
                 </div>
                 
                 <!-- Date of Birth -->
-                <div class="info-tile-premium">
+                <div class="info-tile">
                     <div class="info-tile-icon-box">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     </div>
@@ -99,7 +99,7 @@ if ($search_id) {
                 </div>
                 
                 <!-- Address -->
-                <div class="info-tile-premium">
+                <div class="info-tile">
                     <div class="info-tile-icon-box">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
@@ -112,7 +112,7 @@ if ($search_id) {
         </div>
         
         <div class="record-actions">
-            <button id="viewRecordBtn" class="btn btn-outline record-toggle-btn <?= $search_record ? 'is-hidden' : '' ?>">
+            <button id="viewRecordBtn" class="btn btn-outline btn-with-icon <?= $search_record ? 'is-hidden' : '' ?>">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M12 11v6"/><path d="M9 14h6"/></svg>
                 View Academic Record
             </button>
@@ -121,18 +121,18 @@ if ($search_id) {
 </div>
 
 <!-- Academic Record Card -->
-<div class="dashboard-section-card academic-record-card <?= $search_record ? 'is-visible' : '' ?>" id="academicRecordCard">
-    <div class="dashboard-section-header">
-        <h3 class="dashboard-section-title-premium">
+<div class="student-section-card academic-record-card <?= $search_record ? 'is-visible' : '' ?>" id="academicRecordCard">
+    <div class="student-section-header">
+        <h3 class="student-section-title">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             Academic Record
         </h3>
-        <button id="hideRecordBtn" class="btn btn-outline record-hide-btn">Hide</button>
+        <button id="hideRecordBtn" class="btn btn-outline btn-xs">Hide</button>
     </div>
     
     <div class="info-tiles-grid">
         <!-- Student ID -->
-        <div class="info-tile-premium">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </div>
@@ -143,7 +143,7 @@ if ($search_id) {
         </div>
 
         <!-- Class/Grade -->
-        <div class="info-tile-premium">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </div>
@@ -154,7 +154,7 @@ if ($search_id) {
         </div>
         
         <!-- Section -->
-        <div class="info-tile-premium">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
             </div>
@@ -165,7 +165,7 @@ if ($search_id) {
         </div>
         
         <!-- Roll Number -->
-        <div class="info-tile-premium">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="9" y1="5" x2="9" y2="19"/><line x1="15" y1="5" x2="15" y2="19"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/></svg>
             </div>
@@ -176,7 +176,7 @@ if ($search_id) {
         </div>
         
         <!-- Academic Year -->
-        <div class="info-tile-premium">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
@@ -187,7 +187,7 @@ if ($search_id) {
         </div>
         
         <!-- Admission Date -->
-        <div class="info-tile-premium info-tile-full">
+        <div class="info-tile">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
@@ -212,3 +212,4 @@ if ($search_id) {
 <?php endif; ?>
 </body>
 </html>
+

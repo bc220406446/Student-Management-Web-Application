@@ -2,10 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Flash message auto-dismiss
     const flashBanner = document.getElementById('flashBanner');
     if (flashBanner) {
-        setTimeout(() => {
+        const dismissFlash = () => {
             flashBanner.classList.add('is-dismissing');
             setTimeout(() => flashBanner.remove(), 300);
-        }, 10000);
+        };
+        const duration = Number.parseInt(flashBanner.dataset.duration || '10000', 10);
+        const flashTimer = setTimeout(dismissFlash, Number.isFinite(duration) ? duration : 10000);
+        const flashClose = document.getElementById('flashClose');
+        if (flashClose) {
+            flashClose.addEventListener('click', () => {
+                clearTimeout(flashTimer);
+                dismissFlash();
+            });
+        }
     }
 
     // Password show/hide toggle
@@ -119,3 +128,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
