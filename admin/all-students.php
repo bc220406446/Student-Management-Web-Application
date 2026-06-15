@@ -173,7 +173,7 @@ include '../includes/modals/admin-view-student.php';
 function openDeleteModal(id, name) {
     document.getElementById('deleteStudentId').value = id;
     document.getElementById('deleteModalMessage').textContent = `Are you sure you want to permanently delete ${name}? This action cannot be undone.`;
-    document.getElementById('deleteModal').style.display = 'flex';
+    document.getElementById('deleteModal').classList.add('is-open');
 }
 
 function escapeHtml(value) {
@@ -244,7 +244,7 @@ function openViewModal(s) {
             </div>
         </div>
     `;
-    document.getElementById('viewStudentModal').style.display = 'flex';
+    document.getElementById('viewStudentModal').classList.add('is-open');
 }
 </script>
 </body>

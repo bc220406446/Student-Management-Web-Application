@@ -61,39 +61,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php include '../includes/header_student.php'; ?>
 
-<div style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+<div class="breadcrumb">
     <a href="dashboard.php" class="text-muted">Dashboard</a> › Update Personal Information
 </div>
 
-<div class="card" style="padding: 0;">
+<div class="card profile-edit-card">
     <form method="POST" action="" enctype="multipart/form-data">
-        <div style="background-color: var(--primary); padding: 3rem 2rem 2rem 2rem; color: white; border-radius: var(--radius-lg) var(--radius-lg) 0 0; display: flex; flex-direction: column; align-items: center;">
-            <div style="position: relative;">
-                <div class="profile-avatar-large" style="margin-top: 0; margin-bottom: 1rem;">
+        <div class="profile-edit-hero">
+            <div class="profile-upload-wrap">
+                <div class="profile-avatar-large profile-avatar-edit">
                     <?php if ($student['ProfilePicture']): ?>
-                        <img id="profilePreview" src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Profile" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <img id="profilePreview" src="../<?= htmlspecialchars($student['ProfilePicture']) ?>" alt="Profile" class="profile-image-fill">
                     <?php else: ?>
                         <svg id="profileSvg" width="50%" height="50%" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--primary);"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-                        <img id="profilePreview" src="" alt="Profile" style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <img id="profilePreview" src="" alt="Profile" class="profile-image-fill is-hidden">
                     <?php endif; ?>
                 </div>
                 <!-- Upload Icon Overlay -->
-                <label for="profileUpload" style="position: absolute; bottom: 1rem; right: 0; background: var(--accent); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid white;">
+                <label for="profileUpload" class="profile-upload-trigger">
                     <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 </label>
-                <input type="file" id="profileUpload" name="profile_picture" accept=".jpg,.jpeg,.png,.webp" style="display: none;">
+                <input type="file" id="profileUpload" name="profile_picture" accept=".jpg,.jpeg,.png,.webp" class="hidden-file-input">
             </div>
             
-            <h2 style="color: white; margin-bottom: 0.25rem;"><?= htmlspecialchars($student['Name']) ?></h2>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;"><?= htmlspecialchars($student['Email']) ?></p>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">Click the upload icon to change profile picture (Max 2MB)</p>
+            <h2 class="profile-edit-name"><?= htmlspecialchars($student['Name']) ?></h2>
+            <p class="profile-edit-email"><?= htmlspecialchars($student['Email']) ?></p>
+            <p class="profile-edit-help">Click the upload icon to change profile picture (Max 2MB)</p>
         </div>
         
-        <div style="padding: 2rem;">
+        <div class="form-card-body">
             <h3 class="mb-3">Account Information</h3>
             <table class="info-table mb-3">
                 <tr>
-                    <td style="width: 30%; color: var(--text-muted); font-weight: 500;">Email</td>
+                    <td class="info-table-label">Email</td>
                     <td><?= htmlspecialchars($student['Email']) ?></td>
                 </tr>
             </table>
@@ -119,11 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         
-        <div class="card-header" style="border-bottom: none; border-top: 1px solid var(--border-color); padding: 1.5rem 2rem 1.5rem 2rem; margin: 0; background: #fafafa; border-radius: 0 0 var(--radius-lg) var(--radius-lg); flex-wrap: wrap; gap: 1rem;">
-            <div class="text-muted text-sm" style="flex: 1 1 auto; min-width: 200px;">Changes are saved to your profile immediately</div>
-            <div style="display:flex; gap:0.5rem; flex-wrap: wrap;">
-                <a href="dashboard.php" class="btn btn-outline" style="padding: 0.5rem 1rem;">Back</a>
-                <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;">Save Changes</button>
+        <div class="card-header form-card-footer">
+            <div class="text-muted text-sm footer-note">Changes are saved to your profile immediately</div>
+            <div class="footer-actions">
+                <a href="dashboard.php" class="btn btn-outline btn-compact">Back</a>
+                <button type="submit" class="btn btn-primary btn-compact">Save Changes</button>
             </div>
         </div>
     </form>
@@ -140,10 +140,10 @@ document.getElementById('profileUpload').addEventListener('change', function(e) 
             var svg = document.getElementById('profileSvg');
             if (preview) {
                 preview.src = event.target.result;
-                preview.style.display = 'block';
+                preview.classList.remove('is-hidden');
             }
             if (svg) {
-                svg.style.display = 'none';
+                svg.classList.add('is-hidden');
             }
         }
         reader.readAsDataURL(e.target.files[0]);

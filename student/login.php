@@ -49,28 +49,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php display_flash_message(); ?>
     <div class="split-layout">
         <div class="split-left">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:2rem; font-family:var(--font-heading); font-size:1.5rem;">
+            <div class="portal-brand">
                 <span>Student Management System</span>
             </div>
             <span class="tag">Student Portal</span>
             <h1 class="mb-2">Welcome back to your portal</h1>
-            <p style="color: rgba(255,255,255,0.8);" class="mb-3">Log in to view your academic records, update your profile, and stay connected.</p>
-            
-            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius-md);">
-                <h3 style="color: white; margin-bottom: 1rem; font-size: 1rem; font-family: var(--font-body);">Getting Started</h3>
-                <div style="display:flex; flex-direction:column; gap: 0.75rem; color: rgba(255,255,255,0.8); font-size: 0.875rem;">
-                    <div><strong>1. Register</strong> - Create your account</div>
-                    <div><strong>2. Wait for approval</strong> - Admin verification</div>
-                    <div><strong>3. Login</strong> - Access your dashboard</div>
-                </div>
+            <p class="split-note mb-3">Log in to view your academic records, update your profile, and stay connected.</p>
+
+            <div class="split-hero-icon">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <rect x="9" y="11" width="6" height="4" rx="1"></rect>
+                    <path d="M10 11V9a2 2 0 1 1 4 0v2"></path>
+                </svg>
             </div>
         </div>
         
         <div class="split-right">
-            <div class="auth-form-container card">
-                <div style="display:flex; justify-content:center; margin-bottom: 1rem;">
-                    <div style="display:flex; align-items:center; gap:0.5rem; background: #eff6ff; color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: bold;">
-                        <span style="width:6px; height:6px; background:var(--accent); border-radius:50%; display:inline-block; animation: pulse 2s infinite;"></span>
+            <div class="auth-form-container card card-border">
+                <div class="access-badge-wrap">
+                    <div class="access-badge">
                         Student Access
                     </div>
                 </div>
@@ -84,11 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     
                     <div class="form-group">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <label class="form-label" style="margin:0;">Password</label>
+                        <div class="form-label-row">
+                            <label class="form-label">Password</label>
                             <a href="forgot-password.php" class="text-sm">Forgot password?</a>
                         </div>
-                        <div class="password-wrapper" style="margin-top: 0.5rem;">
+                        <div class="password-wrapper password-wrapper-spaced">
                             <input type="password" name="password" class="form-control" required>
                             <span class="password-toggle">Show</span>
                         </div>
@@ -96,30 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     <button type="submit" class="btn btn-primary btn-block mt-2">Sign In</button>
                     
-                    <div style="display:flex; align-items:center; margin: 1.5rem 0; color: var(--text-muted); font-size: 0.875rem;">
-                        <div style="flex:1; height:1px; background:var(--border-color);"></div>
-                        <div style="padding: 0 1rem;">or</div>
-                        <div style="flex:1; height:1px; background:var(--border-color);"></div>
+                    <div class="auth-divider">
+                        <div class="auth-divider-line"></div>
+                        <div class="auth-divider-text">or</div>
+                        <div class="auth-divider-line"></div>
                     </div>
                     
-                    <div class="text-center mb-3">
+                    <div class="text-center">
                         <a href="register.php" class="text-sm">Don't have an account? Register here</a>
-                    </div>
-                    
-                    <div class="text-center text-muted" style="font-size: 0.75rem; background: var(--bg-color); padding: 0.75rem; border-radius: var(--radius-sm);">
-                        Your account must be approved by an admin before you can log in.
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <style>
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-        }
-    </style>
     <script src="../assets/js/main.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
         $_SESSION['reset_token'] = $token;
         $_SESSION['reset_student_id'] = $user['StudentID'];
         $_SESSION['reset_expires'] = $expires;
-        set_flash_message('success', 'A reset link has been generated. <a href="forgot-password.php?step=reset&token=' . $token . '" style="color:white;text-decoration:underline;">Click here to reset your password</a>');
+        set_flash_message('success', 'A reset link has been generated. <a href="forgot-password.php?step=reset&token=' . $token . '" class="link-light">Click here to reset your password</a>');
     } else {
         set_flash_message('error', 'No account found with that email address.');
     }
@@ -89,18 +89,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
 <?php display_flash_message(); ?>
 <div class="split-layout">
     <div class="split-left">
-        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:2rem; font-family:var(--font-heading); font-size:1.5rem;">
-            <div style="width:36px;height:36px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                <svg width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <span>SMS Portal</span>
+        <div class="portal-brand">
+            <span>Student Management System
+            </span>
         </div>
         <span class="tag">Password Recovery</span>
         <h1 class="mb-2">Reset your password</h1>
-        <p style="color: rgba(255,255,255,0.8);">Enter your registered email and we'll help you regain access to your account.</p>
+        <p class="split-note">Enter your registered email and we'll help you regain access to your account.</p>
+    
+        <div class="split-hero-icon">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <rect x="9" y="11" width="6" height="4" rx="1"></rect>
+                    <path d="M10 11V9a2 2 0 1 1 4 0v2"></path>
+                </svg>
+            </div>
     </div>
     <div class="split-right">
-        <div class="auth-form-container card">
+        <div class="auth-form-container card card-border">
             <?php if ($step === 'reset' && $token_valid): ?>
                 <h2 class="text-center mb-1">Set New Password</h2>
                 <p class="text-center text-muted mb-3">Choose a strong password for your account.</p>
@@ -123,9 +129,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
                     <button type="submit" class="btn btn-primary btn-block mt-2">Reset Password</button>
                 </form>
             <?php elseif ($step === 'reset' && !$token_valid): ?>
-                <div class="text-center" style="padding:2rem 0;">
+                <div class="text-center center-pad">
                     <svg width="48" height="48" fill="none" stroke="var(--danger)" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:1rem;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                    <h3 style="margin-bottom:0.5rem;">Invalid or Expired Link</h3>
+                    <h3 class="title-tight">Invalid or Expired Link</h3>
                     <p class="text-muted mb-3">This reset link is invalid or has expired. Please request a new one.</p>
                     <a href="forgot-password.php" class="btn btn-primary">Request New Link</a>
                 </div>

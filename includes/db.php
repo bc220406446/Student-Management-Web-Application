@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'student_ms';
+$dbname = 'SMS';
 $username = 'root';
 $password = '';
 

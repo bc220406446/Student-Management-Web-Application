@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const flashBanner = document.getElementById('flashBanner');
     if (flashBanner) {
         setTimeout(() => {
-            flashBanner.style.animation = 'slideDown 0.3s ease-out reverse forwards';
+            flashBanner.classList.add('is-dismissing');
             setTimeout(() => flashBanner.remove(), 300);
         }, 10000);
     }
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = trigger.getAttribute('data-modal-target');
             const targetModal = document.getElementById(targetId);
             if (targetModal) {
-                targetModal.style.display = 'flex';
+                targetModal.classList.add('is-open');
                 
                 // Close dropdowns if open
                 const userDropdown = document.getElementById('userDropdown');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const modal = closeBtn.closest('.modal-overlay');
             if (modal) {
-                modal.style.display = 'none';
+                modal.classList.remove('is-open');
             }
         });
     });
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modals.forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.style.display = 'none';
+                modal.classList.remove('is-open');
             }
         });
     });
@@ -105,16 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (viewRecordBtn && academicRecordCard) {
         viewRecordBtn.addEventListener('click', () => {
-            academicRecordCard.style.display = 'block';
-            viewRecordBtn.style.display = 'none';
+            academicRecordCard.classList.add('is-visible');
+            viewRecordBtn.classList.add('is-hidden');
             academicRecordCard.scrollIntoView({ behavior: 'smooth' });
         });
     }
     if (hideRecordBtn && academicRecordCard) {
         hideRecordBtn.addEventListener('click', () => {
-            academicRecordCard.style.display = 'none';
+            academicRecordCard.classList.remove('is-visible');
             if (viewRecordBtn) {
-                viewRecordBtn.style.display = 'inline-flex';
+                viewRecordBtn.classList.remove('is-hidden');
             }
         });
     }

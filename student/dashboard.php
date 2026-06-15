@@ -111,8 +111,8 @@ if ($search_id) {
             </div>
         </div>
         
-        <div style="margin-top: 2rem; display: flex; gap: 1rem; width: 100%; justify-content: center; flex-wrap: wrap;">
-            <button id="viewRecordBtn" class="btn btn-outline" style="<?= $search_record ? 'display:none;' : '' ?> padding: 0.625rem 1.5rem; font-size: 0.875rem; gap: 0.5rem;">
+        <div class="record-actions">
+            <button id="viewRecordBtn" class="btn btn-outline record-toggle-btn <?= $search_record ? 'is-hidden' : '' ?>">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M12 11v6"/><path d="M9 14h6"/></svg>
                 View Academic Record
             </button>
@@ -121,13 +121,13 @@ if ($search_id) {
 </div>
 
 <!-- Academic Record Card -->
-<div class="dashboard-section-card academic-record-card" id="academicRecordCard" style="<?= $search_record ? 'display:block;' : 'display:none;' ?> margin-bottom: 2rem;">
+<div class="dashboard-section-card academic-record-card <?= $search_record ? 'is-visible' : '' ?>" id="academicRecordCard">
     <div class="dashboard-section-header">
         <h3 class="dashboard-section-title-premium">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             Academic Record
         </h3>
-        <button id="hideRecordBtn" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Hide</button>
+        <button id="hideRecordBtn" class="btn btn-outline record-hide-btn">Hide</button>
     </div>
     
     <div class="info-tiles-grid">
@@ -187,7 +187,7 @@ if ($search_id) {
         </div>
         
         <!-- Admission Date -->
-        <div class="info-tile-premium" style="grid-column: span 1; min-width: 100%;">
+        <div class="info-tile-premium info-tile-full">
             <div class="info-tile-icon-box">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>

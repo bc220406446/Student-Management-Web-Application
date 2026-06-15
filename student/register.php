@@ -67,27 +67,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php display_flash_message(); ?>
     <div class="split-layout">
         <div class="split-left">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:2rem; font-family:var(--font-heading); font-size:1.5rem;">
+            <div class="portal-brand">
                 <span>Student Management System</span>
             </div>
             <span class="tag">Academic Portal</span>
             <h1 class="mb-2">Manage student records with ease</h1>
-            <p style="color: rgba(255,255,255,0.8);" class="mb-3">Join our platform to access your academic journey and track your progress in real-time.</p>
-            
-            <ul style="list-style: none; color: rgba(255,255,255,0.8);">
-                <li style="margin-bottom: 0.5rem;">• Easy online registration</li>
-                <li style="margin-bottom: 0.5rem;">• Access to academic records</li>
-                <li style="margin-bottom: 0.5rem;">• Seamless communication</li>
-            </ul>
+            <p class="split-note mb-3">Join our platform to access your academic journey and track your progress in real-time.</p>
+        
+            <div class="split-hero-icon">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <rect x="9" y="11" width="6" height="4" rx="1"></rect>
+                    <path d="M10 11V9a2 2 0 1 1 4 0v2"></path>
+                </svg>
+            </div>
         </div>
         
         <div class="split-right">
-            <div class="register-form-container card">
-                <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:1.5rem;">
-                    <div style="width:8px; height:8px; border-radius:50%; background:var(--accent);"></div>
-                    <div style="width:8px; height:8px; border-radius:50%; background:var(--border-color);"></div>
-                    <div style="width:8px; height:8px; border-radius:50%; background:var(--border-color);"></div>
+            <div class="register-form-container card card-border">
+                <div class="access-badge-wrap">
+                    <div class="access-badge">
+                        Student Registration
+                    </div>
                 </div>
+                
                 
                 <h2 class="text-center mb-1">Create your account</h2>
                 <p class="text-center text-muted mb-3">Fill in the details below to register as a student</p>
@@ -112,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php if(isset($errors['email'])) echo "<span class='form-error'>{$errors['email']}</span>"; ?>
                     </div>
                     
-                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+                    <hr class="section-divider">
                     
                     <div class="form-group">
                         <label class="form-label">Password *</label>
@@ -132,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php if(isset($errors['confirm_password'])) echo "<span class='form-error'>{$errors['confirm_password']}</span>"; ?>
                     </div>
                     
-                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+                    <hr class="section-divider">
                     
                     <div class="row">
                         <div class="col-6 form-group">

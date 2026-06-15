@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="split-right">
-            <div class="auth-form-container card admin-login-card">
+            <div class="auth-form-container card card-border">
                 <div class="badge-center">
                     <div class="badge badge-neutral">Admin Access</div>
                 </div>
@@ -80,10 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-block mt-3">Sign In</button>
-                    
-                    <div class="text-center text-muted mt-3 fine-print">
-                        This portal is restricted to authorized personnel only.
-                    </div>
                 </form>
             </div>
         </div>

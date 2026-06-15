@@ -117,13 +117,13 @@ function openApproveModal(id, name, grade, existingSection, existingRoll, existi
         dateInput.value = existingDate;
     }
     
-    document.getElementById('approveModal').style.display = 'flex';
+    document.getElementById('approveModal').classList.add('is-open');
 }
 
 function openRejectModal(id, name) {
     document.getElementById('rejectStudentId').value = id;
     document.getElementById('rejectModalMessage').textContent = `Are you sure you want to reject ${name}? They will not be able to log in.`;
-    document.getElementById('rejectModal').style.display = 'flex';
+    document.getElementById('rejectModal').classList.add('is-open');
 }
 
 function escapeHtml(value) {
@@ -194,7 +194,7 @@ function openViewModal(s) {
             </div>
         </div>
     `;
-    document.getElementById('viewStudentModal').style.display = 'flex';
+    document.getElementById('viewStudentModal').classList.add('is-open');
 }
 </script>
 </body>
