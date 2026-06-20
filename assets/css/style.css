@@ -260,6 +260,7 @@ textarea.form-control {
 
 .main-content {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -438,6 +439,37 @@ textarea.form-control {
 
 .table tbody tr:hover {
   background-color: #f8fafc;
+}
+
+.all-students-table {
+  table-layout: fixed;
+}
+
+.all-students-table th,
+.all-students-table td {
+  padding: 0.85rem 0.65rem;
+  overflow-wrap: anywhere;
+}
+
+.all-students-table th:nth-child(1) { width: 10%; }
+.all-students-table th:nth-child(2) { width: 13%; }
+.all-students-table th:nth-child(3) { width: 19%; }
+.all-students-table th:nth-child(4) { width: 17%; }
+.all-students-table th:nth-child(5) { width: 9%; }
+.all-students-table th:nth-child(6) { width: 12%; }
+.all-students-table th:nth-child(7) { width: 20%; }
+
+.pending-registrations-table th:nth-child(1) { width: 13%; }
+.pending-registrations-table th:nth-child(2) { width: 14%; }
+.pending-registrations-table th:nth-child(3) { width: 20%; }
+.pending-registrations-table th:nth-child(4) { width: 15%; }
+.pending-registrations-table th:nth-child(5) { width: 8%; }
+.pending-registrations-table th:nth-child(6) { width: 25%; }
+
+@media (min-width: 769px) {
+  .all-students-table-wrapper {
+    overflow-x: hidden;
+  }
 }
 
 /* Student Profile Cards */
@@ -787,6 +819,40 @@ textarea.form-control {
   }
 }
 
+.dashboard-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dashboard-action-panel {
+  border-radius: 10px;
+}
+
+.dashboard-action-panel .admin-panel-header {
+  min-height: 76px;
+  padding: 1rem 1.5rem;
+  border-bottom: 0;
+}
+
+.dashboard-action-panel .btn {
+  min-width: 145px;
+  justify-content: center;
+  padding-top: .65rem;
+  padding-bottom: .65rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard-action-panel .admin-panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-action-panel .btn {
+    width: 100%;
+  }
+}
+
 /* Shared surfaces */
 .student-profile-card,
 .student-section-card,
@@ -806,7 +872,6 @@ textarea.form-control {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.student-profile-card:hover,
 .info-tile:hover,
 .admin-stat-card:hover {
   background: #ffffff;
@@ -838,6 +903,15 @@ textarea.form-control {
   overflow: hidden;
   margin-bottom: 2rem;
 }
+
+.student-profile-card:hover {
+  background: #ffffff;
+  box-shadow:
+    0 10px 15px -3px rgba(59, 130, 246, 0.08),
+    0 4px 6px -2px rgba(59, 130, 246, 0.03);
+  transform: translateY(-2px);
+}
+
 
 .student-profile-banner {
   background: var(--primary);
@@ -1014,11 +1088,14 @@ textarea.form-control {
 .admin-panel-title {
   margin: 0;
   font-size: 1.25rem;
+  background-color: var(--card-bg);
+  border-radius: 10px; 
 }
 
 .admin-section-title {
   color: var(--primary);
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   padding-bottom: 0.5rem;
 }
 

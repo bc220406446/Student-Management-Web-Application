@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['Password'])) {
             if ($user['Status'] === 'Pending') {
                 set_flash_message('warning', 'Your account is pending admin approval. Please check back later.');
-            } elseif ($user['Status'] === 'Rejected') {
-                set_flash_message('error', 'Your registration has been rejected. Please contact the school.');
+            } elseif ($user['Status'] === 'Not Approved') {
+                set_flash_message('error', 'Your registration was not approved. Please contact the administrator.');
             } else {
                 // Approved
                 session_regenerate_id(true);
@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['role'] = 'student';
                 $_SESSION['user_name'] = $user['Name'];
                 $_SESSION['user_email'] = $user['Email'];
-                $_SESSION['user_profile_pic'] = $user['ProfilePicture'];
                 header("Location: dashboard.php");
                 exit;
             }

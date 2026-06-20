@@ -8,12 +8,15 @@ $pending_count = $pending_stmt->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($page_title) ? htmlspecialchars($page_title) : 'Admin Dashboard' ?> - Student Management System</title>
+    <title><?= isset($page_title) ? htmlspecialchars($page_title) : 'Admin Dashboard' ?> - Student Management System
+    </title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body>
     <?php display_flash_message(); ?>
     <div class="dashboard-layout">
@@ -22,44 +25,41 @@ $pending_count = $pending_stmt->fetchColumn();
             <div class="logo-area">
                 <a href="dashboard.php" class="logo-link">
                     <div class="logo-icon">
-                        <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
                     </div>
                 </a>
                 <a href="dashboard.php"><span class="logo-text">Admin Dashboard</span></a>
             </div>
             <ul class="nav-links">
-                <li><a href="dashboard.php" class="<?= $current_page == 'dashboard.php' ? 'active' : '' ?>">
-                    <svg class="nav-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                    Dashboard Overview
-                </a></li>
-                <li><a href="all-students.php" class="<?= ($current_page == 'all-students.php' || $current_page == 'edit-student.php') ? 'active' : '' ?>">
-                    <svg class="nav-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    All Students
-                </a></li>
+                <li><a href="dashboard.php" class="<?= $current_page == 'dashboard.php' ? 'active' : '' ?>">Dashboard
+                        Overview</a></li>
+                <li><a href="all-students.php"
+                        class="<?= ($current_page == 'all-students.php' || $current_page == 'edit-student.php') ? 'active' : '' ?>">All
+                        Students</a></li>
                 <li>
-                    <a href="pending-registrations.php" class="<?= $current_page == 'pending-registrations.php' ? 'active' : '' ?>">
-                        <svg class="nav-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <a href="pending-registrations.php"
+                        class="<?= $current_page == 'pending-registrations.php' ? 'active' : '' ?>">
                         Pending Registrations
-                        <?php if ($pending_count > 0): ?>
-                            <span class="badge badge-default nav-badge"><?= $pending_count ?></span>
-                        <?php endif; ?>
                     </a>
                 </li>
-                <li><a href="add-student.php" class="<?= $current_page == 'add-student.php' ? 'active' : '' ?>">
-                    <svg class="nav-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    Add Student
-                </a></li>
+                <li><a href="add-student.php" class="<?= $current_page == 'add-student.php' ? 'active' : '' ?>">Add
+                        Student</a></li>
             </ul>
         </div>
 
         <!-- Main Content Area -->
         <div class="main-content">
             <div class="topbar">
-                <h2 class="topbar-title"><?= isset($page_title) ? ucwords(strtolower(htmlspecialchars($page_title))) : 'Dashboard' ?></h2>
+                <h2 class="topbar-title">
+                    <?= isset($page_title) ? ucwords(strtolower(htmlspecialchars($page_title))) : 'Dashboard' ?></h2>
                 <div class="topbar-actions">
                     <!-- Admin Icon Top Right -->
                     <div class="dropdown-anchor">
-                        <div class="avatar-chip" id="adminAvatar" title="<?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>">
+                        <div class="avatar-chip" id="adminAvatar"
+                            title="<?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>">
                             A
                         </div>
                         <div class="dropdown-menu dropdown-admin" id="adminDropdown">
@@ -68,7 +68,12 @@ $pending_count = $pending_stmt->fetchColumn();
                                 <small class="text-muted">Administrator</small>
                             </div>
                             <a href="logout.php" class="dropdown-item text-danger">
-                                <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
+                                    stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
                                 Logout
                             </a>
                         </div>
