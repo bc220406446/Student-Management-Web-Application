@@ -12,8 +12,8 @@ $badge = $student['Status'] === 'Approved' ? 'badge-success' : ($student['Status
 $page_title = 'My Record';
 include '../includes/header_student.php';
 ?>
-<div class="admin-panel">
-    <div class="admin-panel-body">
+<div class="dashboard-panel">
+    <div class="dashboard-panel-body">
         <div class="table-wrapper">
             <table class="table">
                 <thead>

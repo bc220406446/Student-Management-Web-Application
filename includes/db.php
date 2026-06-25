@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'SMS';
+$dbname = 'smwa';
 $username = 'root';
 $password = '';
 

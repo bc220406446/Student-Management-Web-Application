@@ -23,9 +23,9 @@ if ($search_id !== '') {
 $page_title = 'Search My Record';
 include '../includes/header_student.php';
 ?>
-<div class="admin-panel">
-    <div class="admin-panel-body">
-        <div class="admin-toolbar mb-3">
+<div class="dashboard-panel">
+    <div class="dashboard-panel-body">
+        <div class="toolbar mb-3">
             <form method="GET" class="filter-form">
                 <input type="number" min="1" name="student_id" class="form-control search-input" placeholder="Enter Student ID" value="<?= htmlspecialchars($search_id) ?>" required>
                 <button class="btn btn-outline" type="submit">Filter</button>

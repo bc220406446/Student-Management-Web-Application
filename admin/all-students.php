@@ -32,9 +32,9 @@ $students = $stmt->fetchAll();
 $page_title = 'All Students';
 include '../includes/header_admin.php';
 ?>
-<div class="admin-panel">
-    <div class="admin-panel-body">
-        <div class="admin-toolbar mb-3">
+<div class="dashboard-panel">
+    <div class="dashboard-panel-body">
+        <div class="toolbar mb-3">
             <form method="GET" class="filter-form">
                 <input name="search" class="form-control search-input" placeholder="ID, name, email, department"
                     value="<?= htmlspecialchars($search) ?>">
@@ -70,7 +70,7 @@ include '../includes/header_admin.php';
                                 <td class="table-name"><?= htmlspecialchars($s['Name']) ?></td>
                                 <td><?= htmlspecialchars($s['Email']) ?></td>
                                 <td><?= htmlspecialchars($s['Department']) ?></td>
-                                <td><?= number_format((float) $s['Marks'], 2) ?></td>
+                                <td><?= number_format((float) $s['Marks']) ?></td>
                                 <td><span class="badge <?= $badge ?>"><?= htmlspecialchars($s['Status']) ?></span></td>
                                 <td>
                                     <div class="action-group"><a href="edit-student.php?id=<?= (int) $s['StudentID'] ?>"

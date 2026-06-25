@@ -14,8 +14,8 @@ include '../includes/header_student.php';
 <div class="review-banner">Welcome, <?= htmlspecialchars($student['Name']) ?>. Choose what you would like to do.</div>
 
 <div class="dashboard-action-list">
-    <section class="admin-panel dashboard-action-panel"><div class="admin-panel-header"><h3 class="admin-panel-title">My Student Record</h3><a href="view-record.php" class="btn btn-primary">View Record</a></div></section>
-    <section class="admin-panel dashboard-action-panel"><div class="admin-panel-header"><h3 class="admin-panel-title">Search Record</h3><a href="search-record.php" class="btn btn-primary">Search by ID</a></div></section>
-    <section class="admin-panel dashboard-action-panel"><div class="admin-panel-header"><h3 class="admin-panel-title">Personal Information</h3><a href="edit-profile.php" class="btn btn-primary">Update Info</a></div></section>
+    <section class="dashboard-panel dashboard-action-panel"><div class="dashboard-panel-header"><h3 class="dashboard-panel-title">My Student Record</h3><a href="view-record.php" class="btn btn-primary">View Record</a></div></section>
+    <section class="dashboard-panel dashboard-action-panel"><div class="dashboard-panel-header"><h3 class="dashboard-panel-title">Search Record</h3><a href="search-record.php" class="btn btn-primary">Search by ID</a></div></section>
+    <section class="dashboard-panel dashboard-action-panel"><div class="dashboard-panel-header"><h3 class="dashboard-panel-title">Personal Information</h3><a href="edit-profile.php" class="btn btn-primary">Update Info</a></div></section>
 </div>
 </div></main></div><script src="../assets/js/main.js"></script></body></html>

@@ -21,8 +21,8 @@ include '../includes/header_admin.php';
 ?>
 <?php if ($pending_students): ?>
     <div class="review-banner"><?= count($pending_students) ?> registration(s) awaiting a decision.</div><?php endif; ?>
-<div class="admin-panel">
-    <div class="admin-panel-body">
+<div class="dashboard-panel">
+    <div class="dashboard-panel-body">
         <div class="table-wrapper all-students-table-wrapper">
             <table class="table all-students-table pending-registrations-table">
                 <thead>
@@ -42,7 +42,7 @@ include '../includes/header_admin.php';
                                 <td class="table-name"><?= htmlspecialchars($s['Name']) ?></td>
                                 <td><?= htmlspecialchars($s['Email']) ?></td>
                                 <td><?= htmlspecialchars($s['Department']) ?></td>
-                                <td><?= number_format((float) $s['Marks'], 2) ?></td>
+                                <td><?= number_format((float) $s['Marks']) ?></td>
                                 <td>
                                     <div class="action-group"><button class="btn btn-primary btn-sm"
                                             onclick="openApproveModal(<?= (int) $s['StudentID'] ?>, <?= htmlspecialchars(json_encode($s['Name']), ENT_QUOTES, 'UTF-8') ?>)">Approve</button><button

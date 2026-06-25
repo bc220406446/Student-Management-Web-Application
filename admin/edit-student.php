@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title = 'Edit Student';
 include '../includes/header_admin.php';
 ?>
-<div class="admin-panel">
+<div class="dashboard-panel">
     <form method="POST">
-        <div class="admin-panel-body">
+        <div class="dashboard-panel-body">
             <div class="row">
                 <div class="col-6 form-group"><label class="form-label">Name</label><input name="name"
                         class="form-control" value="<?= htmlspecialchars($student['Name']) ?>" required></div>
@@ -86,7 +86,7 @@ include '../includes/header_admin.php';
                             <option <?= $student['Status'] === $v ? 'selected' : '' ?>><?= $v ?></option><?php endforeach; ?>
                     </select>
                 </div>
-                <h3 class="admin-section-title mb-3">Reset Password <small class="text-muted">(optional)</small></h3>
+                <h3 class="section-title mb-3">Reset Password <small class="text-muted">(optional)</small></h3>
                 <div class="row">
                 <div class="col-6 form-group"><label class="form-label">New Password</label>
                     <div class="password-wrapper"><input type="password" name="new_password" class="form-control"><span
@@ -101,7 +101,7 @@ include '../includes/header_admin.php';
                 </div>
             </div>
         </div>
-        <div class="admin-panel-footer"><a href="all-students.php" class="btn btn-outline">Cancel</a><button
+        <div class="dashboard-panel-footer"><a href="all-students.php" class="btn btn-outline">Cancel</a><button
                 class="btn btn-primary">Save Changes</button></div>
     </form>
 </div>
