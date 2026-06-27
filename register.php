@@ -1,8 +1,8 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
+require_once 'includes/db.php';
+require_once 'includes/auth.php';
 
-redirect_if_student_logged_in();
+redirect_if_logged_in();
 
 $errors = [];
 $name = trim($_POST['name'] ?? '');
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration - Student Management System</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -63,10 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="split-layout">
         <div class="split-left">
             <div class="portal-brand">Student Management System</div>
-            <span class="tag">Student Portal</span>
+            <span class="tag">Student Registration</span>
             <h1 class="mb-2">Create your student account</h1>
-            <p class="split-note">Enter your details to create an account. Your registration will be reviewed and
-                approved by an administrator.</p>
+            <p class="split-note">Submit your student details for administrator review and approval.</p>
             <div class="split-hero-icon">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)"
                     stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -78,11 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="split-right">
             <div class="register-form-container card card-border">
-                <div class="access-badge-wrap">
-                    <div class="access-badge">
-                        Student Registration
-                    </div>
-                </div>
                 <h2 class="text-center mb-1">Create your account</h2>
                 <p class="text-center text-muted mb-3">All fields are required</p>
                 <form method="POST">
@@ -136,12 +130,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-2">Register</button>
-                    <div class="text-center mt-2"><a href="login.php">Already registered? Log in</a></div>
+                    
+                    <div class="auth-divider">
+                        <div class="auth-divider-line"></div>
+                        <div class="auth-divider-text">or</div>
+                        <div class="auth-divider-line"></div>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-sm">Already registered? <a href="login.php">Login here</a></span>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

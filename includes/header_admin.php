@@ -67,7 +67,7 @@ $pending_count = $pending_stmt->fetchColumn();
                                 <strong><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?></strong><br>
                                 <small class="text-muted">Administrator</small>
                             </div>
-                            <a href="logout.php" class="dropdown-item text-danger">
+                            <a href="../logout.php" class="dropdown-item text-danger">
                                 <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
                                     stroke-width="2" viewBox="0 0 24 24">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

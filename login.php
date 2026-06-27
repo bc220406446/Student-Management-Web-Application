@@ -1,8 +1,8 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
+require_once 'includes/db.php';
+require_once 'includes/auth.php';
 
-redirect_if_student_logged_in();
+redirect_if_logged_in();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
@@ -11,7 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || empty($password)) {
         set_flash_message('error', 'Please enter both email and password.');
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM student WHERE Email = ?");
+        $stmt = $pdo->prepare('SELECT * FROM admin WHERE Email = ?');
+        $stmt->execute([$email]);
+        $admin = $stmt->fetch();
+
+        if ($admin && password_verify($password, $admin['Password'])) {
+            session_regenerate_id(true);
+            $_SESSION['admin_id'] = $admin['AdminID'];
+            $_SESSION['role'] = 'admin';
+            $_SESSION['admin_name'] = $admin['Name'];
+            $_SESSION['admin_email'] = $admin['Email'];
+            header('Location: admin/dashboard.php');
+            exit;
+        }
+
+        $stmt = $pdo->prepare('SELECT * FROM student WHERE Email = ?');
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
@@ -21,13 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } elseif ($user['Status'] === 'Not Approved') {
                 set_flash_message('error', 'Your registration was not approved. Please contact the administrator.');
             } else {
-                // Approved
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['StudentID'];
                 $_SESSION['role'] = 'student';
                 $_SESSION['user_name'] = $user['Name'];
                 $_SESSION['user_email'] = $user['Email'];
-                header("Location: dashboard.php");
+                header('Location: student/dashboard.php');
                 exit;
             }
         } else {
@@ -42,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Student Management System</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <?php display_flash_message(); ?>
@@ -51,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="portal-brand">
                 <span>Student Management System</span>
             </div>
-            <span class="tag">Student Portal</span>
-            <h1 class="mb-2">Welcome back to your portal</h1>
-            <p class="split-note mb-3">Log in to view your academic records, update your profile, and stay connected.</p>
+            <span class="tag">Role Based Access</span>
+            <h1 class="mb-2">Sign in to your portal</h1>
+            <p class="split-note mb-3">Your account type is detected automatically after you sign in.</p>
 
             <div class="split-hero-icon">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -63,23 +76,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </svg>
             </div>
         </div>
-        
+
         <div class="split-right">
             <div class="auth-form-container card card-border">
-                <div class="access-badge-wrap">
-                    <div class="access-badge">
-                        Student Access
-                    </div>
-                </div>
                 <h2 class="text-center mb-1">Sign in to your account</h2>
                 <p class="text-center text-muted mb-3">Enter your credentials to continue</p>
-                
+
                 <form method="POST" action="">
                     <div class="form-group">
                         <label class="form-label">Email Address</label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <div class="form-label-row">
                             <label class="form-label">Password</label>
@@ -90,22 +98,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <span class="password-toggle">Show</span>
                         </div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary btn-block mt-2">Sign In</button>
-                    
+
                     <div class="auth-divider">
                         <div class="auth-divider-line"></div>
                         <div class="auth-divider-text">or</div>
                         <div class="auth-divider-line"></div>
                     </div>
-                    
+
                     <div class="text-center">
-                        <a href="register.php" class="text-sm">Don't have an account? Register here</a>
+                        <span class="text-sm">Don't have an account? <a href="register.php">Register here</a></span>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

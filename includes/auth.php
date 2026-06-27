@@ -33,7 +33,7 @@ function display_flash_message() {
 // Student authentication
 function require_student_login() {
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
-        header("Location: ../student/login.php");
+        header("Location: ../login.php");
         exit;
     }
 }
@@ -41,7 +41,19 @@ function require_student_login() {
 // Admin authentication
 function require_admin_login() {
     if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'admin') {
-        header("Location: ../admin/login.php");
+        header("Location: ../login.php");
+        exit;
+    }
+}
+
+function redirect_if_logged_in() {
+    if (isset($_SESSION['admin_id']) && ($_SESSION['role'] ?? '') === 'admin') {
+        header("Location: admin/dashboard.php");
+        exit;
+    }
+
+    if (isset($_SESSION['user_id']) && ($_SESSION['role'] ?? '') === 'student') {
+        header("Location: student/dashboard.php");
         exit;
     }
 }

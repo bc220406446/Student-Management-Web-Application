@@ -32,13 +32,3 @@ CREATE TABLE IF NOT EXISTS student (
     Marks DECIMAL(5,2) DEFAULT 0.00,
     Status ENUM('Approved', 'Not Approved', 'Pending') DEFAULT 'Pending'
 );
-
--- Upgrade older SMS installations without deleting existing student records.
-ALTER TABLE student
-    ADD COLUMN IF NOT EXISTS Department VARCHAR(100) NOT NULL DEFAULT 'Unassigned' AFTER Password,
-    ADD COLUMN IF NOT EXISTS Marks DECIMAL(5,2) NOT NULL DEFAULT 0.00 AFTER Department;
-
-UPDATE student SET Status = 'Not Approved' WHERE Status = 'Rejected';
-
-ALTER TABLE student
-    MODIFY COLUMN Status ENUM('Approved', 'Not Approved', 'Pending') NOT NULL DEFAULT 'Pending';

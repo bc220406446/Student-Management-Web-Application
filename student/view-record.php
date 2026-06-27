@@ -6,7 +6,7 @@ require_student_login();
 $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Department, Marks, Status FROM student WHERE StudentID = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $student = $stmt->fetch();
-if (!$student) { session_destroy(); header('Location: login.php'); exit; }
+if (!$student) { session_destroy(); header('Location: ../login.php'); exit; }
 
 $badge = $student['Status'] === 'Approved' ? 'badge-success' : ($student['Status'] === 'Pending' ? 'badge-warning' : 'badge-error');
 $page_title = 'My Record';

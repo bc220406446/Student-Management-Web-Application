@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap");
 
-/* ==========================================================================
-   ROOT: variables, reset, utilities, and shared controls
-   ========================================================================== */
+/* ROOT: variables, reset, utilities, and shared controls*/
 
 :root {
   --primary: #0f2744;
@@ -238,146 +236,7 @@ a:hover { color: var(--primary); }
   .col-6 { flex: 1 1 100%; }
 }
 
-/* ==========================================================================
-   STUDENT: register page
-   ========================================================================== */
-
-.split-layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-.split-left {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  width: 420px;
-  padding: 3rem;
-  background: var(--primary);
-  color: white;
-}
-
-.split-left h1,
-.split-left h2 { color: white; }
-
-.split-right {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: var(--bg-color);
-}
-
-.portal-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-}
-
-.tag {
-  display: inline-block;
-  align-self: flex-start;
-  margin-bottom: 1rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.split-note { color: rgba(255, 255, 255, 0.8); }
-
-.register-form-container {
-  width: 100%;
-  max-width: 600px;
-}
-
-.access-badge-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.access-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  background: #eff6ff;
-  color: var(--accent);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .split-layout { flex-direction: column; }
-  .split-left { width: 100%; padding: 2rem; }
-}
-
-/* ==========================================================================
-   STUDENT: login page
-   ========================================================================== */
-
-.auth-form-container {
-  width: 100%;
-  max-width: 420px;
-  padding: 2.5rem;
-}
-
-.form-label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form-label-row .form-label { margin: 0; }
-.password-wrapper-spaced { margin-top: 0.5rem; }
-
-.auth-divider {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
-
-.auth-divider-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border-color);
-}
-
-.auth-divider-text { padding: 0 1rem; }
-
-.split-hero-icon {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-/* ==========================================================================
-   STUDENT: forgot password page
-   ========================================================================== */
-
-.center-pad { padding: 2rem 0; }
-.title-tight { margin-bottom: 0.5rem; }
-
-/* ==========================================================================
-   STUDENT: reset password page
-   ========================================================================== */
-
-/* Reset-password controls reuse the auth form, password, and button rules. */
-
-/* ==========================================================================
-   STUDENT: header and sidebar
-   ========================================================================== */
+/* Shared dashboard shell, navigation, panels, tables, and filters. */
 
 .dashboard-layout {
   display: flex;
@@ -420,6 +279,11 @@ a:hover { color: var(--primary); }
   line-height: 1.2;
 }
 
+.link-icon {
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
 .nav-links {
   flex: 1;
   list-style: none;
@@ -440,7 +304,6 @@ a:hover { color: var(--primary); }
   color: white;
 }
 
-.nav-badge { margin-left: auto; }
 
 .main-content {
   display: flex;
@@ -531,56 +394,6 @@ a:hover { color: var(--primary); }
   .sidebar { width: 100%; }
 }
 
-/* ==========================================================================
-   STUDENT: dashboard page
-   ========================================================================== */
-
-.review-banner {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius-md);
-  background: var(--primary);
-  color: white;
-  font-weight: 500;
-}
-
-.dashboard-action-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.dashboard-action-panel { border-radius: 10px; }
-
-.dashboard-action-panel .dashboard-panel-header {
-  min-height: 76px;
-  padding: 1rem 1.5rem;
-  border-bottom: 0;
-}
-
-.dashboard-action-panel .btn {
-  min-width: 145px;
-  justify-content: center;
-  padding-top: 0.65rem;
-  padding-bottom: 0.65rem;
-}
-
-@media (max-width: 600px) {
-  .dashboard-action-panel .dashboard-panel-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .dashboard-action-panel .btn { width: 100%; }
-}
-
-/* ==========================================================================
-   STUDENT: view record page
-   ========================================================================== */
-
 .dashboard-panel {
   overflow: hidden;
   border: 1px solid var(--border-color);
@@ -646,10 +459,6 @@ a:hover { color: var(--primary); }
   .dashboard-panel-body { padding: 1.25rem; }
 }
 
-/* ==========================================================================
-   STUDENT: search record page
-   ========================================================================== */
-
 .toolbar,
 .filter-form,
 .action-group {
@@ -677,9 +486,176 @@ a:hover { color: var(--primary); }
   .toolbar .btn { width: 100%; }
 }
 
-/* ==========================================================================
-   STUDENT: update personal information page
-   ========================================================================== */
+/* AUTH PAGES * /
+
+/* Shared login, registration, and password recovery layout. */
+
+.split-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.split-left {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 420px;
+  padding: 3rem;
+  background: var(--primary);
+  color: white;
+}
+
+.split-left h1,
+.split-left h2 { color: white; }
+
+.split-right {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg-color);
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+}
+
+.tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.split-note { color: rgba(255, 255, 255, 0.8); }
+
+.register-form-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.access-badge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.access-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: #eff6ff;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .split-layout { flex-direction: column; }
+  .split-left { width: 100%; padding: 2rem; }
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+}
+
+.form-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-label-row .form-label { margin: 0; }
+.password-wrapper-spaced { margin-top: 0.5rem; }
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.auth-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.auth-divider-text { padding: 0 1rem; }
+
+.split-hero-icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.center-pad { padding: 2rem 0; }
+.title-tight { margin-bottom: 0.5rem; }
+
+/* STUDENT PAGES */
+
+/* STUDENT: dashboard page */
+
+.review-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: white;
+  font-weight: 500;
+}
+
+.dashboard-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dashboard-action-panel { border-radius: 10px; }
+
+.dashboard-action-panel .dashboard-panel-header {
+  min-height: 76px;
+  padding: 1rem 1.5rem;
+  border-bottom: 0;
+}
+
+.dashboard-action-panel .btn {
+  min-width: 145px;
+  justify-content: center;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard-action-panel .dashboard-panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-action-panel .btn { width: 100%; }
+}
+
+/* STUDENT: update personal information page */
 
 .section-title {
   padding-bottom: 0.5rem;
@@ -688,35 +664,9 @@ a:hover { color: var(--primary); }
   color: var(--primary);
 }
 
-/* ==========================================================================
-   ADMIN: login page
-   ========================================================================== */
+/* ADMIN PAGES */
 
-.badge-center {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.badge-neutral {
-  background: #e2e8f0;
-  color: #334155;
-}
-
-/* ==========================================================================
-   ADMIN: header and sidebar
-   ========================================================================== */
-
-/* Admin header and sidebar reuse the dashboard layout defined above. */
-
-.link-icon {
-  flex-shrink: 0;
-  margin-right: 0.5rem;
-}
-
-/* ==========================================================================
-   ADMIN: dashboard page
-   ========================================================================== */
+/* ADMIN: dashboard page */
 
 .admin-stats-grid {
   display: grid;
@@ -757,9 +707,7 @@ a:hover { color: var(--primary); }
   font-size: 0.875rem;
 }
 
-/* ==========================================================================
-   ADMIN: all students page
-   ========================================================================== */
+/* ADMIN: all students page */
 
 .all-students-table { table-layout: fixed; }
 
@@ -812,9 +760,7 @@ a:hover { color: var(--primary); }
   .all-students-table-wrapper { overflow-x: hidden; }
 }
 
-/* ==========================================================================
-   ADMIN: pending registrations page
-   ========================================================================== */
+/* ADMIN: pending registrations page */
 
 .pending-registrations-table th:nth-child(1) { width: 13%; }
 .pending-registrations-table th:nth-child(2) { width: 14%; }
@@ -823,15 +769,11 @@ a:hover { color: var(--primary); }
 .pending-registrations-table th:nth-child(5) { width: 8%; }
 .pending-registrations-table th:nth-child(6) { width: 25%; }
 
-/* ==========================================================================
-   ADMIN: add student page
-   ========================================================================== */
+/* ADMIN: add student page */
 
 /* Add-student fields reuse the shared form, row, and dashboard-panel rules. */
 
-/* ==========================================================================
-   ADMIN: edit student page
-   ========================================================================== */
+/* ADMIN: edit student page */
 
 /* Edit-student fields reuse the shared form, row, and dashboard-panel rules. */
  

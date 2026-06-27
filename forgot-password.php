@@ -1,13 +1,12 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
+require_once 'includes/db.php';
+require_once 'includes/auth.php';
 
-redirect_if_student_logged_in();
+redirect_if_logged_in();
 
 $step = $_GET['step'] ?? 'email';
 $token_valid = false;
 
-// Step 1: Submit email → send reset token
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
     $email = trim($_POST['email']);
     $stmt = $pdo->prepare("SELECT StudentID, Name FROM student WHERE Email = ?");
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
     if ($user) {
         $token = bin2hex(random_bytes(32));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
-        // Store token in session (no email server needed for demo)
         $_SESSION['reset_token'] = $token;
         $_SESSION['reset_student_id'] = $user['StudentID'];
         $_SESSION['reset_expires'] = $expires;
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
     exit;
 }
 
-// Step 2: Validate token and show reset form
 if ($step === 'reset') {
     $token = $_GET['token'] ?? '';
     if (
@@ -41,7 +38,6 @@ if ($step === 'reset') {
     }
 }
 
-// Step 3: Process new password
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
     $token = $_POST['token'] ?? '';
     $new_password = $_POST['new_password'];
@@ -83,27 +79,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password - Student Management System</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <?php display_flash_message(); ?>
 <div class="split-layout">
     <div class="split-left">
         <div class="portal-brand">
-            <span>Student Management System
-            </span>
+            <span>Student Management System</span>
         </div>
         <span class="tag">Password Recovery</span>
         <h1 class="mb-2">Reset your password</h1>
         <p class="split-note">Enter your registered email and we'll help you regain access to your account.</p>
-    
+
         <div class="split-hero-icon">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    <rect x="9" y="11" width="6" height="4" rx="1"></rect>
-                    <path d="M10 11V9a2 2 0 1 1 4 0v2"></path>
-                </svg>
-            </div>
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <rect x="9" y="11" width="6" height="4" rx="1"></rect>
+                <path d="M10 11V9a2 2 0 1 1 4 0v2"></path>
+            </svg>
+        </div>
     </div>
     <div class="split-right">
         <div class="auth-form-container card card-border">
@@ -145,14 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-2">Send Reset Link</button>
                     <div class="text-center mt-2">
-                        <a href="login.php" class="text-sm">← Back to Login</a>
+                        <a href="login.php" class="text-sm">Back to Login</a>
                     </div>
                 </form>
             <?php endif; ?>
         </div>
     </div>
 </div>
-<script src="../assets/js/main.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
-
