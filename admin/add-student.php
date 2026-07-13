@@ -1,7 +1,10 @@
 <?php
+// Load the database, start the session, and allow administrators only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_admin_login();
+
+// Keep submitted values so the form can show them again after an error.
 $errors = [];
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
@@ -9,6 +12,7 @@ $department = trim($_POST['department'] ?? '');
 $marks = trim($_POST['marks'] ?? '0');
 $status = $_POST['status'] ?? 'Approved';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate all submitted fields before saving the student.
     $password = $_POST['password'] ?? '';
     $confirm = $_POST['confirm_password'] ?? '';
     if ($name === '')
@@ -30,12 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($check->fetch())
         $errors['email'] = 'Email already exists.';
     if (!$errors) {
+        // Hash the password so the plain password is never stored.
         $pdo->prepare('INSERT INTO student (Name,Email,Password,Department,Marks,Status) VALUES (?,?,?,?,?,?)')->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $department, $marks, $status]);
         set_flash_message('success', 'Student created.');
         header('Location: all-students.php');
         exit;
     }
 }
+
+// Load the shared administrator page header before displaying the form.
 $page_title = 'Add Student';
 include '../includes/header_admin.php';
 ?>

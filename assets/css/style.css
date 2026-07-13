@@ -1,8 +1,14 @@
+/* Load the fonts used throughout the application from Google Fonts. */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap");
 
-/* ROOT: variables, reset, utilities, and shared controls*/
+/* 
+   1. GLOBAL SETTINGS
+   These styles apply to the entire website. CSS variables make it
+   easy to reuse the same colors, fonts, spacing, and corner sizes.
+    */
 
 :root {
+  /* Main colors */
   --primary: #0f2744;
   --accent: #3b82f6;
   --bg-color: #f1f5f9;
@@ -13,6 +19,8 @@
   --danger: #dc2626;
   --text-main: #334155;
   --text-muted: #64748b;
+
+  /* Fonts, shadows, and rounded corners */
   --font-body: "DM Sans", sans-serif;
   --font-heading: "DM Serif Display", serif;
   --card-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
@@ -21,7 +29,9 @@
 }
 
 * {
+  /* Include padding and borders inside an element's declared size. */
   box-sizing: border-box;
+  /* Remove browser default spacing for consistent page layout. */
   margin: 0;
   padding: 0;
 }
@@ -39,6 +49,7 @@ h3,
 h4,
 h5,
 h6 {
+  /* All headings use the decorative heading font. */
   font-family: var(--font-heading);
   color: var(--primary);
   font-weight: 400;
@@ -49,6 +60,7 @@ h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
 
 a {
+  /* Smoothly change link color when the mouse moves over it. */
   color: var(--accent);
   text-decoration: none;
   transition: color 0.2s;
@@ -56,6 +68,7 @@ a {
 
 a:hover { color: var(--primary); }
 
+/* Small utility classes used directly in HTML for text and spacing. */
 .text-muted { color: var(--text-muted); }
 .text-sm { font-size: 0.875rem; }
 .text-center { text-align: center; }
@@ -67,6 +80,7 @@ a:hover { color: var(--primary); }
 .link-light { color: white; text-decoration: underline; }
 
 .row {
+  /* Place child columns side by side and allow wrapping when needed. */
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -74,6 +88,7 @@ a:hover { color: var(--primary); }
 
 .col-6 { flex: 1; }
 
+/* A reusable white content box. */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -84,6 +99,11 @@ a:hover { color: var(--primary); }
 
 .card-border { border-top: 4px solid var(--primary); }
 
+/* 
+   2. BUTTONS
+   .btn contains shared button styles. Extra classes such as
+   .btn-primary and .btn-outline choose the button appearance.
+    */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -131,6 +151,11 @@ a:hover { color: var(--primary); }
   font-size: 0.875rem;
 }
 
+/* 
+   3. FORMS
+   Shared styles for labels, text fields, validation messages, and
+   the show/hide password control.
+    */
 .form-group { margin-bottom: 1.25rem; }
 
 .form-label {
@@ -152,6 +177,7 @@ a:hover { color: var(--primary); }
 }
 
 .form-control:focus {
+  /* :focus is active while a user is typing in the field. */
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
@@ -167,6 +193,7 @@ a:hover { color: var(--primary); }
 .password-wrapper { position: relative; }
 
 .password-toggle {
+  /* Absolute positioning places "Show" inside the password field. */
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -175,6 +202,11 @@ a:hover { color: var(--primary); }
   transform: translateY(-50%);
 }
 
+/* 
+   4. STATUS BADGES AND FLASH MESSAGES
+   Badges show record status. Flash banners show temporary success,
+   warning, or error messages after an action.
+    */
 .badge {
   display: inline-block;
   padding: 0.25rem 0.625rem;
@@ -189,6 +221,7 @@ a:hover { color: var(--primary); }
 .badge-error { background: #fee2e2; color: #b91c1c; }
 
 .flash-banner {
+  /* Keep the message fixed at the top even when the page scrolls. */
   position: fixed;
   inset: 0 0 auto;
   z-index: 9999;
@@ -228,16 +261,21 @@ a:hover { color: var(--primary); }
 .flash-banner.is-dismissing { animation: slide-down 0.3s ease-out reverse forwards; }
 
 @keyframes slide-down {
+  /* Move a flash message from above the page into view. */
   from { opacity: 0; transform: translateY(-100%); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
+  /* On smaller screens, two form columns become one full-width row. */
   .col-6 { flex: 1 1 100%; }
 }
 
-/* Shared dashboard shell, navigation, panels, tables, and filters. */
-
+/* 
+   5. DASHBOARD LAYOUT AND SIDEBAR
+   Creates the left navigation sidebar and the main page area used
+   by both administrator and student dashboards.
+    */
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
@@ -285,6 +323,7 @@ a:hover { color: var(--primary); }
 }
 
 .nav-links {
+  /* flex: 1 uses remaining height and keeps other sidebar items below. */
   flex: 1;
   list-style: none;
 }
@@ -335,11 +374,13 @@ a:hover { color: var(--primary); }
 }
 
 .content-area {
+  /* Allow only the main content area to scroll vertically. */
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
 }
 
+/* Circular user-initial button shown in the top bar. */
 .avatar-chip {
   display: flex;
   align-items: center;
@@ -356,6 +397,7 @@ a:hover { color: var(--primary); }
   cursor: pointer;
 }
 
+/* The relative parent gives the absolute dropdown a position reference. */
 .dropdown-anchor { position: relative; }
 
 .dropdown-menu {
@@ -390,10 +432,16 @@ a:hover { color: var(--primary); }
 .dropdown-item.text-danger { color: var(--danger); }
 
 @media (max-width: 768px) {
+  /* Stack the sidebar above the page content on phones and tablets. */
   .dashboard-layout { flex-direction: column; }
   .sidebar { width: 100%; }
 }
 
+/* 
+   6. DASHBOARD PANELS AND TABLES
+   Panels group related content. Table styles display student data
+   clearly and remain scrollable on small screens.
+    */
 .dashboard-panel {
   overflow: hidden;
   border: 1px solid var(--border-color);
@@ -429,9 +477,11 @@ a:hover { color: var(--primary); }
   font-size: 1.25rem;
 }
 
+/* Add horizontal scrolling if a table is wider than the screen. */
 .table-wrapper { overflow-x: auto; }
 
 .table {
+  /* Merge neighboring cell borders into a clean single border. */
   width: 100%;
   border-collapse: collapse;
 }
@@ -459,6 +509,10 @@ a:hover { color: var(--primary); }
   .dashboard-panel-body { padding: 1.25rem; }
 }
 
+/* 
+   7. SEARCH, FILTER, AND ACTION TOOLBAR
+   Arranges search boxes, status filters, and record action buttons.
+    */
 .toolbar,
 .filter-form,
 .action-group {
@@ -480,16 +534,18 @@ a:hover { color: var(--primary); }
 .action-group { gap: 0.5rem; }
 
 @media (max-width: 768px) {
+  /* Make toolbar controls easy to tap by filling the mobile width. */
   .filter-form,
   .filter-form .search-input,
   .filter-form .status-input,
   .toolbar .btn { width: 100%; }
 }
 
-/* AUTH PAGES * /
-
-/* Shared login, registration, and password recovery layout. */
-
+/* 
+   8. LOGIN AND REGISTRATION PAGES
+   The split layout has a colored information panel on the left and
+   an authentication form on the right.
+    */
 .split-layout {
   display: flex;
   min-height: 100vh;
@@ -565,10 +621,12 @@ a:hover { color: var(--primary); }
 }
 
 @media (max-width: 768px) {
+  /* Change the two-column authentication page into a vertical layout. */
   .split-layout { flex-direction: column; }
   .split-left { width: 100%; padding: 2rem; }
 }
 
+/* Limit form width so login fields do not become too wide. */
 .auth-form-container {
   width: 100%;
   max-width: 420px;
@@ -609,10 +667,11 @@ a:hover { color: var(--primary); }
 .center-pad { padding: 2rem 0; }
 .title-tight { margin-bottom: 0.5rem; }
 
-/* STUDENT PAGES */
-
-/* STUDENT: dashboard page */
-
+/* 
+   9. DASHBOARD CONTENT AND ACTION CARDS
+   Styles welcome banners, quick-action panels, section titles, and
+   administrator statistics cards.
+    */
 .review-banner {
   display: flex;
   align-items: center;
@@ -655,8 +714,6 @@ a:hover { color: var(--primary); }
   .dashboard-action-panel .btn { width: 100%; }
 }
 
-/* STUDENT: update personal information page */
-
 .section-title {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
@@ -664,11 +721,8 @@ a:hover { color: var(--primary); }
   color: var(--primary);
 }
 
-/* ADMIN PAGES */
-
-/* ADMIN: dashboard page */
-
 .admin-stats-grid {
+  /* auto-fit automatically chooses the number of cards per row. */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
@@ -689,6 +743,7 @@ a:hover { color: var(--primary); }
 }
 
 .admin-stat-card:hover {
+  /* Lift the card slightly to show that it is being hovered. */
   border-color: var(--accent);
   background: white;
   box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.08),
@@ -707,8 +762,11 @@ a:hover { color: var(--primary); }
   font-size: 0.875rem;
 }
 
-/* ADMIN: all students page */
-
+/* 
+   10. STUDENT TABLE COLUMN WIDTHS
+   Fixed column widths keep administrator tables aligned and readable.
+   nth-child(1) means the first column, nth-child(2) the second, etc.
+    */
 .all-students-table { table-layout: fixed; }
 
 .all-students-table th,
@@ -725,6 +783,11 @@ a:hover { color: var(--primary); }
 .all-students-table th:nth-child(6) { width: 14%; }
 .all-students-table th:nth-child(7) { width: 18%; }
 
+/* 
+   11. CONFIRMATION MODALS
+   The overlay darkens the page. JavaScript adds .is-open to display
+   the centered confirmation box for actions such as deleting.
+    */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -757,23 +820,14 @@ a:hover { color: var(--primary); }
 }
 
 @media (min-width: 769px) {
+  /* Hide horizontal table overflow only on larger screens. */
   .all-students-table-wrapper { overflow-x: hidden; }
 }
 
-/* ADMIN: pending registrations page */
-
+/* Column widths used by the pending registration table. */
 .pending-registrations-table th:nth-child(1) { width: 13%; }
 .pending-registrations-table th:nth-child(2) { width: 14%; }
 .pending-registrations-table th:nth-child(3) { width: 20%; }
 .pending-registrations-table th:nth-child(4) { width: 15%; }
 .pending-registrations-table th:nth-child(5) { width: 8%; }
 .pending-registrations-table th:nth-child(6) { width: 25%; }
-
-/* ADMIN: add student page */
-
-/* Add-student fields reuse the shared form, row, and dashboard-panel rules. */
-
-/* ADMIN: edit student page */
-
-/* Edit-student fields reuse the shared form, row, and dashboard-panel rules. */
- 

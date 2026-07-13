@@ -1,4 +1,5 @@
 <?php
+// Load required files and restrict the page to logged-in students.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_student_login();
@@ -7,12 +8,15 @@ $search_id = trim($_GET['student_id'] ?? '');
 $student = null;
 $search_error = '';
 
+// Process a search only after a student ID has been entered.
 if ($search_id !== '') {
     if (!ctype_digit($search_id)) {
         $search_error = 'Enter a valid numeric Student ID.';
     } elseif ((int) $search_id !== (int) $_SESSION['user_id']) {
+        // Compare with the session ID to prevent access to another record.
         $search_error = 'You can only search for your own student record.';
     } else {
+        // A prepared statement safely loads the current student's record.
         $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Department, Marks, Status FROM student WHERE StudentID = ?');
         $stmt->execute([(int) $search_id]);
         $student = $stmt->fetch();
@@ -20,6 +24,7 @@ if ($search_id !== '') {
     }
 }
 
+// Display the search form and its result in the student layout.
 $page_title = 'Search My Record';
 include '../includes/header_student.php';
 ?>
@@ -41,6 +46,7 @@ include '../includes/header_student.php';
                 </thead>
                 <tbody>
                     <?php if ($student):
+                        // Choose a badge color that matches the account status.
                         $badge = $student['Status'] === 'Approved' ? 'badge-success' : ($student['Status'] === 'Pending' ? 'badge-warning' : 'badge-error');
                     ?>
                         <tr>

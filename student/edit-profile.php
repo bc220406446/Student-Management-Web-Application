@@ -1,8 +1,10 @@
 <?php
+// Load required files and protect this page from unauthenticated users.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_student_login();
 
+// Use the session ID so a student can load only their own profile.
 $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Password, Department, Marks, Status FROM student WHERE StudentID = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $student = $stmt->fetch();
@@ -10,6 +12,7 @@ if (!$student) { session_destroy(); header('Location: ../login.php'); exit; }
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Read and clean the values submitted by the profile form.
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $department = trim($_POST['department'] ?? '');
@@ -24,29 +27,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($marks === '' || !is_numeric($marks) || (float) $marks < 0 || (float) $marks > 999.99) {
         $errors['marks'] = 'Marks must be a number between 0 and 999.99.';
     }
+    // Make sure another student is not already using the new email address.
     $check = $pdo->prepare('SELECT StudentID FROM student WHERE Email = ? AND StudentID <> ?');
     $check->execute([$email, $_SESSION['user_id']]);
     if ($check->fetch()) $errors['email'] = 'That email is already in use.';
 
     if ($new_password !== '' || $current_password !== '' || $confirm_password !== '') {
+        // Password checks are required only when the student tries to change it.
         if (!password_verify($current_password, $student['Password'])) $errors['current_password'] = 'Current password is incorrect.';
         if (strlen($new_password) < 8) $errors['new_password'] = 'New password must be at least 8 characters.';
         if ($new_password !== $confirm_password) $errors['confirm_password'] = 'Passwords do not match.';
     }
 
     if (!$errors) {
+        // Update profile fields and add the password field only when it changed.
         $sql = 'UPDATE student SET Name = ?, Email = ?, Department = ?, Marks = ?';
         $params = [$name, $email, $department, (float) $marks];
         if ($new_password !== '') { $sql .= ', Password = ?'; $params[] = password_hash($new_password, PASSWORD_DEFAULT); }
         $sql .= ' WHERE StudentID = ?'; $params[] = $_SESSION['user_id'];
         $pdo->prepare($sql)->execute($params);
+        // Keep the session name and email synchronized with the saved profile.
         $_SESSION['user_name'] = $name;
         $_SESSION['user_email'] = $email;
         set_flash_message('success', 'Personal information updated successfully.');
         header('Location: edit-profile.php'); exit;
     }
+    // Keep submitted values in the form when validation fails.
     $student['Name'] = $name; $student['Email'] = $email; $student['Department'] = $department; $student['Marks'] = $marks;
 }
+
+// Render the form inside the shared student layout.
 $page_title = 'Update Personal Info';
 include '../includes/header_student.php';
 ?>

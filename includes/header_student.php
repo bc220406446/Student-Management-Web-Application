@@ -1,4 +1,5 @@
 <?php
+// Highlight the current sidebar link and provide a default page title.
 $current_page = basename($_SERVER['PHP_SELF']);
 $page_title = $page_title ?? 'Student Dashboard';
 ?>
@@ -13,8 +14,10 @@ $page_title = $page_title ?? 'Student Dashboard';
 </head>
 
 <body>
+    <!-- Show a one-time success, warning, or error message when available. -->
     <?php display_flash_message(); ?>
     <div class="dashboard-layout">
+        <!-- Navigation shared by every student page. -->
         <aside class="sidebar">
             <div class="logo-area">
                 <a href="dashboard.php" class="logo-link">
@@ -39,11 +42,13 @@ $page_title = $page_title ?? 'Student Dashboard';
             </ul>
         </aside>
         <main class="main-content">
+            <!-- The top bar shows the page title and logged-in student menu. -->
             <header class="topbar">
                 <h2 class="topbar-title"><?= htmlspecialchars($page_title) ?></h2>
                 <div class="topbar-actions dropdown-anchor">
                     <div class="avatar-chip" id="userAvatar"
                         title="<?= htmlspecialchars($_SESSION['user_name'] ?? 'Student') ?>">
+                        <!-- Use the first letter of the student's name as the avatar. -->
                         <?= htmlspecialchars(strtoupper(substr($_SESSION['user_name'] ?? 'S', 0, 1))) ?></div>
                     <div class="dropdown-menu dropdown-admin" id="userDropdown">
                         <div class="dropdown-header">

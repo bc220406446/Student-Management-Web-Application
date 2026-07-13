@@ -1,11 +1,16 @@
 <?php
+// Load required files and restrict the dashboard to administrators.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_admin_login();
+
+// Count students in each status group for the summary cards.
 $total_students = $pdo->query('SELECT COUNT(*) FROM student')->fetchColumn();
 $pending_students = $pdo->query("SELECT COUNT(*) FROM student WHERE Status = 'Pending'")->fetchColumn();
 $approved_students = $pdo->query("SELECT COUNT(*) FROM student WHERE Status = 'Approved'")->fetchColumn();
 $not_approved_students = $pdo->query("SELECT COUNT(*) FROM student WHERE Status = 'Not Approved'")->fetchColumn();
+
+// Use the common administrator header and navigation.
 $page_title = 'Dashboard Overview';
 include '../includes/header_admin.php';
 ?>

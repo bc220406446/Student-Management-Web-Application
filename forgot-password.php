@@ -1,19 +1,23 @@
 <?php
+// Load the database connection and session/authentication helpers.
 require_once 'includes/db.php';
 require_once 'includes/auth.php';
 
 redirect_if_logged_in();
 
+// The page has two steps: request by email, then enter a new password.
 $step = $_GET['step'] ?? 'email';
 $token_valid = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+    // Find the student account connected to the submitted email.
     $email = trim($_POST['email']);
     $stmt = $pdo->prepare("SELECT StudentID, Name FROM student WHERE Email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
     if ($user) {
+        // Create a random reset token that remains valid for one hour.
         $token = bin2hex(random_bytes(32));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
         $_SESSION['reset_token'] = $token;
@@ -28,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
 }
 
 if ($step === 'reset') {
+    // Accept the reset form only when its token matches and has not expired.
     $token = $_GET['token'] ?? '';
     if (
         isset($_SESSION['reset_token']) &&
@@ -39,6 +44,7 @@ if ($step === 'reset') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
+    // Read the token and both password fields from the reset form.
     $token = $_POST['token'] ?? '';
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
@@ -48,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
         $_SESSION['reset_token'] === $token &&
         strtotime($_SESSION['reset_expires']) > time()
     ) {
+        // Validate the new password before updating the database.
         if (strlen($new_password) < 8) {
             set_flash_message('error', 'Password must be at least 8 characters.');
             header("Location: forgot-password.php?step=reset&token=$token");
@@ -62,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
         $update = $pdo->prepare("UPDATE student SET Password = ? WHERE StudentID = ?");
         $update->execute([$hashed, $_SESSION['reset_student_id']]);
 
+        // Remove reset data so the same link cannot be used again.
         unset($_SESSION['reset_token'], $_SESSION['reset_student_id'], $_SESSION['reset_expires']);
         set_flash_message('success', 'Password reset successfully! You can now log in.');
         header("Location: login.php");
@@ -102,6 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
     </div>
     <div class="split-right">
         <div class="auth-form-container card card-border">
+            <!-- Display the form that matches the current recovery step. -->
             <?php if ($step === 'reset' && $token_valid): ?>
                 <h2 class="text-center mb-1">Set New Password</h2>
                 <p class="text-center text-muted mb-3">Choose a strong password for your account.</p>

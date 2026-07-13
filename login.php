@@ -1,21 +1,26 @@
 <?php
+// Load the database connection and session/authentication helpers.
 require_once 'includes/db.php';
 require_once 'includes/auth.php';
 
+// Send users with an active session directly to their dashboard.
 redirect_if_logged_in();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Read the submitted login credentials.
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
         set_flash_message('error', 'Please enter both email and password.');
     } else {
+        // Check administrator accounts first because both roles use this form.
         $stmt = $pdo->prepare('SELECT * FROM admin WHERE Email = ?');
         $stmt->execute([$email]);
         $admin = $stmt->fetch();
 
         if ($admin && password_verify($password, $admin['Password'])) {
+            // Start a fresh admin session after successful password verification.
             session_regenerate_id(true);
             $_SESSION['admin_id'] = $admin['AdminID'];
             $_SESSION['role'] = 'admin';
@@ -25,16 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
+        // If no admin matched, look for a student with the same email.
         $stmt = $pdo->prepare('SELECT * FROM student WHERE Email = ?');
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['Password'])) {
+            // Only approved students are allowed to enter the student portal.
             if ($user['Status'] === 'Pending') {
                 set_flash_message('warning', 'Your account is pending admin approval. Please check back later.');
             } elseif ($user['Status'] === 'Not Approved') {
                 set_flash_message('error', 'Your registration was not approved. Please contact the administrator.');
             } else {
+                // Store the student's identity and role in the session.
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['StudentID'];
                 $_SESSION['role'] = 'student';

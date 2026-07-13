@@ -1,7 +1,10 @@
 <?php
+// Protect this page so only a logged-in administrator can use it.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_admin_login();
+
+// Delete a student only when the delete form sends a valid student ID.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
     $id = filter_input(INPUT_POST, 'student_id', FILTER_VALIDATE_INT);
     if ($id)
@@ -10,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     header('Location: all-students.php');
     exit;
 }
+
+// Read and validate the optional search and status filters from the URL.
 $search = trim($_GET['search'] ?? '');
 $status = $_GET['status'] ?? 'All';
 $allowed = ['All', 'Approved', 'Not Approved', 'Pending'];
@@ -17,6 +22,8 @@ if (!in_array($status, $allowed, true))
     $status = 'All';
 $where = [];
 $params = [];
+
+// Build only the SQL conditions needed for the selected filters.
 if ($search !== '') {
     $where[] = '(StudentID = ? OR Name LIKE ? OR Email LIKE ? OR Department LIKE ?)';
     $params = [ctype_digit($search) ? (int) $search : 0, "%$search%", "%$search%", "%$search%"];
@@ -29,6 +36,8 @@ $sql = 'SELECT StudentID, Name, Email, Department, Marks, Status FROM student' .
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $students = $stmt->fetchAll();
+
+// Display the results inside the shared administrator layout.
 $page_title = 'All Students';
 include '../includes/header_admin.php';
 ?>
@@ -93,6 +102,7 @@ include '../includes/header_admin.php';
 </div>
 <script src="../assets/js/main.js"></script>
 <script>
+    // Add the selected student to the confirmation modal before showing it.
     function openDeleteModal(id, name) {
         document.getElementById('deleteStudentId').value = id;
         document.getElementById('deleteModalMessage').textContent = `Delete ${name}? This cannot be undone.`;

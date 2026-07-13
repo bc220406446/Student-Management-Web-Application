@@ -1,9 +1,11 @@
 <?php
+// Load the database connection and session/authentication helpers.
 require_once 'includes/db.php';
 require_once 'includes/auth.php';
 
 redirect_if_logged_in();
 
+// Keep submitted values available if validation returns an error.
 $errors = [];
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
@@ -11,6 +13,7 @@ $department = trim($_POST['department'] ?? '');
 $marks = trim($_POST['marks'] ?? '0');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate all student registration fields on the server.
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
@@ -29,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['confirm_password'] = 'Passwords do not match.';
 
     if (!$errors) {
+        // Check that the email is not already registered.
         $check = $pdo->prepare('SELECT StudentID FROM student WHERE Email = ?');
         $check->execute([$email]);
         if ($check->fetch())
@@ -37,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$errors) {
         try {
+            // New registrations remain pending until an administrator approves them.
             $insert = $pdo->prepare("INSERT INTO student (Name, Email, Password, Department, Marks, Status) VALUES (?, ?, ?, ?, ?, 'Pending')");
             $insert->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $department, (float) $marks]);
             set_flash_message('success', 'Registration submitted. You can log in after admin approval.');

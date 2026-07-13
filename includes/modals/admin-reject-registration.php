@@ -1,9 +1,10 @@
-<!-- Reject Modal -->
+<!-- Confirmation dialog used before rejecting a pending registration. -->
 <div class="modal-overlay" id="rejectModal">
     <div class="modal-card">
         <h3 class="mb-3">Do Not Approve Registration</h3>
         <p class="mb-3" id="rejectModalMessage">Are you sure you do not want to approve this registration?</p>
 
+        <!-- JavaScript fills the hidden student ID before opening this modal. -->
         <form method="POST" action="">
             <input type="hidden" name="action" value="reject">
             <input type="hidden" name="student_id" id="rejectStudentId">

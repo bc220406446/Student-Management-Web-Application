@@ -1,12 +1,15 @@
 <?php
+// Load required files and restrict this page to administrators.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_admin_login();
 
+// Process an approval or rejection submitted by a confirmation modal.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_id = filter_input(INPUT_POST, 'student_id', FILTER_VALIDATE_INT);
     $action = $_POST['action'] ?? '';
     if ($student_id && in_array($action, ['approve', 'reject'], true)) {
+        // Convert the requested action into the status stored in the database.
         $status = $action === 'approve' ? 'Approved' : 'Not Approved';
         $update = $pdo->prepare("UPDATE student SET Status = ? WHERE StudentID = ? AND Status = 'Pending'");
         $update->execute([$status, $student_id]);
@@ -15,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: pending-registrations.php');
     exit;
 }
+
+// Show only registrations that still require an administrator decision.
 $pending_students = $pdo->query("SELECT StudentID, Name, Email, Department, Marks, Status FROM student WHERE Status = 'Pending' ORDER BY StudentID ASC")->fetchAll();
 $page_title = 'Pending Registrations';
 include '../includes/header_admin.php';
@@ -65,6 +70,7 @@ include '../includes/modals/admin-reject-registration.php'; ?>
 </div>
 <script src="../assets/js/main.js"></script>
 <script>
+    // Fill and open the correct confirmation modal for the selected student.
     function openApproveModal(id, name) { document.getElementById('approveStudentId').value = id; document.getElementById('approveModalMessage').textContent = `Approve ${name}'s registration?`; document.getElementById('approveModal').classList.add('is-open'); }
     function openRejectModal(id, name) { document.getElementById('rejectStudentId').value = id; document.getElementById('rejectModalMessage').textContent = `Mark ${name}'s registration as not approved?`; document.getElementById('rejectModal').classList.add('is-open'); }
 </script>

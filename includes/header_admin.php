@@ -1,8 +1,8 @@
 <?php
-// Determine active page for sidebar
+// Identify the current page so its sidebar link can be highlighted.
 $current_page = basename($_SERVER['PHP_SELF']);
 
-// Count pending registrations for badge
+// Count registrations that are still waiting for an admin decision.
 $pending_stmt = $pdo->query("SELECT COUNT(*) FROM student WHERE Status = 'Pending'");
 $pending_count = $pending_stmt->fetchColumn();
 ?>
@@ -18,6 +18,7 @@ $pending_count = $pending_stmt->fetchColumn();
 </head>
 
 <body>
+    <!-- Show a one-time success, warning, or error message when available. -->
     <?php display_flash_message(); ?>
     <div class="dashboard-layout">
         <!-- Sidebar -->
@@ -50,13 +51,13 @@ $pending_count = $pending_stmt->fetchColumn();
             </ul>
         </div>
 
-        <!-- Main Content Area -->
+        <!-- Main content shared by every administrator page. -->
         <div class="main-content">
             <div class="topbar">
                 <h2 class="topbar-title">
                     <?= isset($page_title) ? ucwords(strtolower(htmlspecialchars($page_title))) : 'Dashboard' ?></h2>
                 <div class="topbar-actions">
-                    <!-- Admin Icon Top Right -->
+                    <!-- Clicking the admin avatar opens the account dropdown. -->
                     <div class="dropdown-anchor">
                         <div class="avatar-chip" id="adminAvatar"
                             title="<?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>">

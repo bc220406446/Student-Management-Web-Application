@@ -1,18 +1,23 @@
 <?php
+// Load required files and allow administrators only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
 require_admin_login();
+
+// Get the student ID from the URL and load the matching record.
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $stmt = $pdo->prepare('SELECT * FROM student WHERE StudentID=?');
 $stmt->execute([$id]);
 $student = $stmt->fetch();
 if (!$student) {
+    // Return to the list when the ID is invalid or the record does not exist.
     set_flash_message('error', 'Student not found.');
     header('Location: all-students.php');
     exit;
 }
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Clean and validate the updated form values.
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $department = trim($_POST['department'] ?? '');
@@ -39,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($new_password !== $confirm)
         $errors['confirm_password'] = 'Passwords do not match.';
     if (!$errors) {
+        // Build the update query; change the password only when one is entered.
         $sql = 'UPDATE student SET Name=?,Email=?,Department=?,Marks=?,Status=?';
         $params = [$name, $email, $department, $marks, $status];
         if ($new_password !== '') {
@@ -52,8 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: all-students.php');
         exit;
     }
+    // Keep valid submitted values visible when another field has an error.
     $student = array_merge($student, ['Name' => $name, 'Email' => $email, 'Department' => $department, 'Marks' => $marks, 'Status' => $status]);
 }
+
+// Render the form inside the shared administrator layout.
 $page_title = 'Edit Student';
 include '../includes/header_admin.php';
 ?>
