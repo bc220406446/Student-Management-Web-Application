@@ -431,17 +431,6 @@ a:hover { color: var(--primary); }
 .dropdown-item:hover { background: var(--bg-color); }
 .dropdown-item.text-danger { color: var(--danger); }
 
-/* The logout control is a submit button so it posts instead of using a link. */
-button.dropdown-item {
-  width: 100%;
-  border: 0;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
 @media (max-width: 768px) {
   /* Stack the sidebar above the page content on phones and tablets. */
   .dashboard-layout { flex-direction: column; }
@@ -668,12 +657,6 @@ button.dropdown-item {
 }
 
 .auth-divider-text { padding: 0 1rem; }
-
-/* Marks the current screen in the unified auth page's screen switcher. */
-.auth-nav-active {
-  font-weight: 700;
-  color: var(--primary);
-}
 
 .split-hero-icon {
   display: flex;

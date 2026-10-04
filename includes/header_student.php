@@ -54,18 +54,15 @@ $page_title = $page_title ?? 'Student Dashboard';
                         <div class="dropdown-header">
                             <strong><?= htmlspecialchars($_SESSION['user_name'] ?? 'Student') ?></strong><br><small
                                 class="text-muted"><?= htmlspecialchars($_SESSION['user_email'] ?? '') ?></small></div>
-                        <!-- Logout posts to the unified auth entry point. -->
-                        <form method="POST" action="../auth.php?a=logout">
-                            <button type="submit" class="dropdown-item text-danger">
-                                <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                    <polyline points="16 17 21 12 16 7" />
-                                    <line x1="21" y1="12" x2="9" y2="12" />
-                                </svg>
-                                Logout
-                            </button>
-                        </form>
+                        <a href="../logout.php" class="dropdown-item text-danger">
+                            <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                            Logout
+                        </a>
                     </div>
                 </div>
             </header>

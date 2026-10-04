@@ -2,7 +2,7 @@
 // Protect this page so only a logged-in administrator can use it.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_role(ROLE_ADMIN);
+require_admin_login();
 
 // Delete a student only when the delete form sends a valid student ID.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {

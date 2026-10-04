@@ -2,14 +2,14 @@
 // Load required files and allow logged-in students only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_role(ROLE_STUDENT);
+require_student_login();
 
 // Load only the record that belongs to the current session user.
 $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Department, Marks, Status FROM student WHERE StudentID = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $student = $stmt->fetch();
 // End the session if the student's database record no longer exists.
-if (!$student) { logout_user(); header('Location: ../' . AUTH_ENTRY); exit; }
+if (!$student) { session_destroy(); header('Location: ../login.php'); exit; }
 
 // Display the dashboard inside the shared student layout.
 $page_title = 'Student Dashboard';

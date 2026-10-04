@@ -2,7 +2,7 @@
 // Load required files and allow administrators only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_role(ROLE_ADMIN);
+require_admin_login();
 
 // Get the student ID from the URL and load the matching record.
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

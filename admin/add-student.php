@@ -2,7 +2,7 @@
 // Load the database, start the session, and allow administrators only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_role(ROLE_ADMIN);
+require_admin_login();
 
 // Keep submitted values so the form can show them again after an error.
 $errors = [];

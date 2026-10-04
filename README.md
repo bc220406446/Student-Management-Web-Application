@@ -90,13 +90,11 @@ There is one login page for everyone. The app checks whether the email belongs t
 ## Project structure
 
 ```
-index.php             Entry point, redirects to auth.php
-auth.php              Unified authentication entry point
-                        ?a=login     Sign in (both roles, detected automatically)
-                        ?a=register  Student registration
-                        ?a=forgot    Request a password reset link
-                        ?a=reset     Choose a new password from a reset link
-                        ?a=logout    End the session (POST only)
+index.php             Entry point, redirects to login
+login.php             Single login page for students and administrators
+register.php          Student registration
+forgot-password.php   Password reset for students
+logout.php            Ends the session
 admin/                Administrator pages
   dashboard.php
   pending-registrations.php
@@ -109,7 +107,6 @@ student/              Student pages
   search-record.php
   edit-profile.php
 includes/             Database connection, auth helpers, headers, modals
-  auth.php            Session, flash messages and role based access control
 assets/               CSS and JavaScript
 smwa.sql              Database schema with sample data
 ```

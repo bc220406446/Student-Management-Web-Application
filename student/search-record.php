@@ -2,7 +2,7 @@
 // Load required files and restrict the page to logged-in students.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_role(ROLE_STUDENT);
+require_student_login();
 
 $search_id = trim($_GET['student_id'] ?? '');
 $student = null;
