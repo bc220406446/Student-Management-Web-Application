@@ -2,14 +2,14 @@
 // Load required files and allow logged-in students only.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_student_login();
+require_role(ROLE_STUDENT);
 
 // The session ID ensures the student can view only their own record.
 $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Department, Marks, Status FROM student WHERE StudentID = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $student = $stmt->fetch();
 // Log out safely if the account was removed after the session began.
-if (!$student) { session_destroy(); header('Location: ../login.php'); exit; }
+if (!$student) { logout_user(); header('Location: ../' . AUTH_ENTRY); exit; }
 
 // Select the correct visual badge class for the student's status.
 $badge = $student['Status'] === 'Approved' ? 'badge-success' : ($student['Status'] === 'Pending' ? 'badge-warning' : 'badge-error');

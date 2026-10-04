@@ -2,13 +2,13 @@
 // Load required files and protect this page from unauthenticated users.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_student_login();
+require_role(ROLE_STUDENT);
 
 // Use the session ID so a student can load only their own profile.
 $stmt = $pdo->prepare('SELECT StudentID, Name, Email, Password, Department, Marks, Status FROM student WHERE StudentID = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $student = $stmt->fetch();
-if (!$student) { session_destroy(); header('Location: ../login.php'); exit; }
+if (!$student) { logout_user(); header('Location: ../' . AUTH_ENTRY); exit; }
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

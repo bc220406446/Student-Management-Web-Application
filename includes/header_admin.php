@@ -60,23 +60,26 @@ $pending_count = $pending_stmt->fetchColumn();
                     <!-- Clicking the admin avatar opens the account dropdown. -->
                     <div class="dropdown-anchor">
                         <div class="avatar-chip" id="adminAvatar"
-                            title="<?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>">
-                            A
+                            title="<?= htmlspecialchars($_SESSION['user_name'] ?? 'Admin') ?>">
+                            <?= htmlspecialchars(strtoupper(substr($_SESSION['user_name'] ?? 'A', 0, 1))) ?>
                         </div>
                         <div class="dropdown-menu dropdown-admin" id="adminDropdown">
                             <div class="dropdown-header">
-                                <strong><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?></strong><br>
-                                <small class="text-muted">Administrator</small>
+                                <strong><?= htmlspecialchars($_SESSION['user_name'] ?? 'Admin') ?></strong><br>
+                                <small class="text-muted"><?= htmlspecialchars($_SESSION['user_email'] ?? '') ?></small>
                             </div>
-                            <a href="../logout.php" class="dropdown-item text-danger">
-                                <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                    <polyline points="16 17 21 12 16 7" />
-                                    <line x1="21" y1="12" x2="9" y2="12" />
-                                </svg>
-                                Logout
-                            </a>
+                            <!-- Logout posts to the unified auth entry point. -->
+                            <form method="POST" action="../auth.php?a=logout">
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor"
+                                        stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                        <polyline points="16 17 21 12 16 7" />
+                                        <line x1="21" y1="12" x2="9" y2="12" />
+                                    </svg>
+                                    Logout
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

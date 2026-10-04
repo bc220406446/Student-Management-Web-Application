@@ -2,7 +2,7 @@
 // Load required files and restrict the dashboard to administrators.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_admin_login();
+require_role(ROLE_ADMIN);
 
 // Count students in each status group for the summary cards.
 $total_students = $pdo->query('SELECT COUNT(*) FROM student')->fetchColumn();

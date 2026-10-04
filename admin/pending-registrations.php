@@ -2,7 +2,7 @@
 // Load required files and restrict this page to administrators.
 require_once '../includes/db.php';
 require_once '../includes/auth.php';
-require_admin_login();
+require_role(ROLE_ADMIN);
 
 // Process an approval or rejection submitted by a confirmation modal.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
